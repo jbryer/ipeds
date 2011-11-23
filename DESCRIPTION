@@ -1,0 +1,32 @@
+Package: ipeds
+Type: Package
+Title: Integrated Postsecondary Education Data System
+    (IPEDS) Access
+Version: 0.9
+Date: 2010-11-19
+Author: Jason Bryer <jbryer@excelsior.edu>
+Maintainer: Jason Bryer <jbryer@excelsior.edu>
+Depends:
+    utils
+Suggests:
+    XML
+Description: The Integrated Postsecondary Education Data
+    System (IPEDS) is the core postsecondary education data
+    collection system for the National Center for Education
+    Statistics (NCES). IPEDS provides a mechanism to upload
+    survey data from institutions in XML format. This
+    package provides functions to assist in the generating
+    XML files that can then be uploaded to IPEDS as well as
+    download data from the IPEDS website.
+License: GPL
+LazyLoad: yes
+URL: http://ipeds.r-forge.r-project.org
+Collate:
+    'completions.R'
+    'fallEnrollment.R'
+    'getIPEDSSurvey.R'
+    'ipedsHelp.R'
+    'mapIPEDSFields.R'
+    'package.R'
+    'recode.R'
+    'twelveMonthEnrollment.R'
