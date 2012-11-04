@@ -2,8 +2,8 @@
 \alias{getIPEDSSurvey}
 \title{getIPEDSSurvey}
 \usage{
-  getIPEDSSurvey(surveyId, year, dir = system.file(package
-  = "ipeds"))
+  getIPEDSSurvey(surveyId, year,
+    dir = system.file(package = "ipeds"))
 }
 \arguments{
   \item{surveyId}{The survey ID of the dictionary to

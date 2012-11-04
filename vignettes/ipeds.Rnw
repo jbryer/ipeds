@@ -1,0 +1,144 @@
+%\VignetteIndexEntry{ipeds: R Package for Interfacing with the Integrated Postsecondary Education Data System}
+\documentclass[letterpaper,11pt]{article}
+
+\oddsidemargin 0.0in
+\evensidemargin 0.0in
+\textwidth 6.5in
+\headheight 0.0in
+
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{indentfirst}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{appendix}
+\usepackage{verbatim}
+\usepackage{lscape}
+\usepackage{rotating}
+
+
+\DeclareMathOperator{\var}{var}
+\DeclareMathOperator{\cov}{cov}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\title{\texttt{ipeds}: R Package for Interfacing with the Integrated Postsecondary Education Data System}
+\author{Jason M. Bryer\\
+\small{}Excelsior College\\
+\small{}jbryer@excelsior.edu}
+\date{\today}
+
+\maketitle
+
+\abstract{This paper provides an overview of the \texttt{ipeds} package for R.}
+
+
+\section{Introduction}
+Integrated Postsecondary Data System (IPEDS)
+
+\subsection{Installing the \texttt{ipeds} Package}
+The \texttt{ipeds} package is maintained on the R-Forge \cite{rforge} website. This site allows for collaboration among researchers across the globe. The R-Forge website maintains nightly builds of all packages hosted and as such, the latest \texttt{ipeds} package can be retrieved directly from the R-Forge website. The following command will download and install the \texttt{ipeds} package along with all required package dependencies (note that the second \texttt{repos} parameter can be changed to a CRAN mirror closest to your location).
+
+<<echo=TRUE,eval=FALSE>>=
+require(devtools)
+install_github('ipeds','jbryer')
+@
+
+Once the package is installed it can be loaded. The \texttt{ls} command will print all the functions available in the package.
+<<echo=TRUE,eval=TRUE>>=
+library(ipeds)
+library(xtable)
+ls('package:ipeds')
+data(surveys)
+@
+
+\section{Retrieving Data from IPEDS}
+The \texttt{ipeds} package includes a data frame that lists the data available from the IPEDS website. There are currently \Sexpr{nrow(surveys)} data files that can be retrieved. Once the desired survey is identified, the value of the \texttt{SurveyID} column is used for most of the data retrieving functions.
+
+<<echo=TRUE,eval=TRUE>>=
+names(surveys)
+head(surveys[,c('SurveyID', 'Survey', 'Title')])
+
+peerIds = c(105668,127918,128780,144777,163204,183257,187046,202806,206279,223816,260901,413413,433387,444158,445027,449339)
+directory = recodeDirectory(getIPEDSSurvey('HD', 2009))
+names(directory); nrow(directory)
+unitid = directory[which(directory$instnm == 'Excelsior College'),'unitid']
+@
+
+
+\section{Student Charges}
+
+<<echo=TRUE,results=tex>>=
+studentCharges = getIPEDSSurvey('IC_AY', 2009)
+studentCharges = studentCharges[,c('unitid',
+	'tuition1', 'fee1', 'hrchg1', 'cmpfee1', #In-district average tuition for full-time undergraduates 
+	'tuition2', 'fee2', 'hrchg2', 'cmpfee2', #In-state average tuition for full-time undergraduates 
+	'tuition3', 'fee3', 'hrchg3', 'cmpfee3', #Out-of-state average tuition for full-time undergraduates 
+	'tuition5', 'fee5', 'hrchg5', #In-district average tuition full-time graduates
+	'tuition6', 'fee6', 'hrchg6', #In-state average tuition full-time graduates
+	'tuition7', 'fee7', 'hrchg7')] #Out-of-state average tuition full-time graduates
+studentCharges = rbind(studentCharges[which(studentCharges$unitid == unitid),], studentCharges[which(studentCharges$unitid %in% peerIds),])
+studentCharges = merge(studentCharges, directory[,c('unitid', 'instnm')], by='unitid', all.x=TRUE)
+
+addtorow = list()
+addtorow$pos = list()
+addtorow$pos[[1]] = c(-1)
+addtorow$command = c("\\hline & \\multicolumn{3}{c}{In State} & \\multicolumn{3}{c}{Out-of-State}  \\\\ \\cline{2-4} \\cline{5-7} Institution & Tuition & Fees & Per Credit & Tuition & Fees & Per Credit \\\\")
+x = xtable(studentCharges[,c('instnm', 'tuition2', 'fee2', 'hrchg2', 'tuition3', 'fee3', 'hrchg3')], caption="Cost of Attendance - Undergraduate", label='tab:costundergrad')
+print(x, include.rownames=FALSE, include.colnames=FALSE, add.to.row=addtorow)
+@
+
+\section{Submitting Data to IPEDS}
+
+
+
+\newpage
+\begin{thebibliography}{}
+\bibitem{r}
+R Development Core Team (2010). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. ISBN 3-900051-07-0, URL \url{http://www.R-project.org}.
+\bibitem{rforge}
+Stefan Theu$\beta$l and Achim Zeileis. Collaborative software development using R-Forge. \textit{The R Journal}, 1(1):9-14, May 2009. URL \url{http://journal.R-project.org/}
+\bibitem{xml}
+Duncan Temple Lang (duncan@wald.ucdavis.edu) (2010). XML: Tools for parsing and generating XML within R and S-Plus.. R package version 3.1-0. http://CRAN.R-project.org/package=XML
+\bibitem{ipeds}
+National Center for Educational Statistics (2010). Integrated Postsecondary Data System. Washington D.C. URL \url{http://nces.ed.gov/ipeds/}
+\end{thebibliography}{}
+
+
+\newpage
+\appendix
+\appendixpage
+
+\section{Surveys Available from IPEDS}
+\label{appendixSurveys}
+\begin{description}
+\item[HD] Directory information
+\item[IC] Educational offerings, organization, admissions, services and athletic associations
+\item[IC\_AY] Student charges for academic year programs
+\item[IC\_PY] Student charges by program (vocational programs)
+\item[FLAGS] Response status for all survey components
+\item[EFEST] Estimated enrollment
+\item[EFFY] 12-month unduplicated headcount
+\item[EFIA] 12-month instructional activity
+\item[FLAGS] Response status for all survey components
+\item[C\_A] Awards/degrees conferred by program (6-digit CIP code), award level, race/ethnicity, and gender
+\item[FLAGS] Response status for all survey components
+\item[SAL\_A] Salaries of full-time instructional faculty, by contract length, gender, and academic rank
+\item[SAL\_B] Fringe benefits of full-time instructional faculty, by contract length
+\item[SAL\_FACULTY] Tenure status of full-time instructional faculty in 4-year institutions, by contract length, gender, and academic rank
+\item[SAL\_A\_LT9] Number of full-time instructional faculty with less than 9-month contracts, by gender and academic rank
+\item[FLAGS] Response status for all survey components
+\item[S\_ABD] Employees by primary occupation, salary categories, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees)
+\item[S\_F] Full-time instruction/research/public service staff, by tenure status, academic rank, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees)
+\item[S\_G] New hires by primary occupation, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees)
+\item[S\_CN] Employees by primary occupation, race/ethnicity, and gender (Degree-granting institutions with less than 15 full-time employees and all nondegree-granting institutions)
+\item[FLAGS] Response status for all survey components
+\item[EAP] Employees by faculty status, primary function/occupational activity
+\item[FLAGS] Response status for all survey components
+
+
+\end{description}
+
+\end{document}

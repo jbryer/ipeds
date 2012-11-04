@@ -3,10 +3,10 @@
 \title{completions}
 \usage{
   completions(data, mappings = NULL, institutionId = NA,
-  institutionName = NA, documentId = "a", createdDate =
-  format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S"),
-  noteMessage = NA, transmissionType = "Original",
-  documentType = "Application")
+    institutionName = NA, documentId = "a",
+    createdDate = format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S"),
+    noteMessage = NA, transmissionType = "Original",
+    documentType = "Application")
 }
 \arguments{
   \item{data}{A data frame containing the required fields

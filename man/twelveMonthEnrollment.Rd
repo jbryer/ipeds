@@ -3,14 +3,15 @@
 \title{twelveMonthEnrollment}
 \usage{
   twelveMonthEnrollment(data, mappings = NULL,
-  institutionId = NA, institutionName = NA, documentId =
-  "a", createdDate = format(Sys.time(),
-  "\%Y-\%m-\%dT\%H:\%M:\%S"), noteMessage = NA,
-  transmissionType = "Original", documentType =
-  "Application", reportingPeriod = "July-June",
-  undergraduateContactHours = NULL,
-  undergraduateCreditHours = NULL, graduateCreditHours =
-  NULL)
+    institutionId = NA, institutionName = NA,
+    documentId = "a",
+    createdDate = format(Sys.time(), "\%Y-\%m-\%dT\%H:\%M:\%S"),
+    noteMessage = NA, transmissionType = "Original",
+    documentType = "Application",
+    reportingPeriod = "July-June",
+    undergraduateContactHours = NULL,
+    undergraduateCreditHours = NULL,
+    graduateCreditHours = NULL)
 }
 \arguments{
   \item{data}{A data frame containing the required fields

@@ -2,8 +2,8 @@
 \alias{downloadIPEDSSurvey}
 \title{downloadIPEDSSurvey}
 \usage{
-  downloadIPEDSSurvey(surveyId, year, dir =
-  system.file(package = "ipeds"))
+  downloadIPEDSSurvey(surveyId, year,
+    dir = system.file(package = "ipeds"))
 }
 \arguments{
   \item{surveyId}{the survey ID from the surveys data
