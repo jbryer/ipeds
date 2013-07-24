@@ -1,4 +1,6 @@
-#' This function will return the IPEDS survey data for the given survey and year. Note that the first time this function is invoked it will attempt to download the data file from the IPEDS website.
+#' This function will return the IPEDS survey data for the given survey and year. 
+#' Note that the first time this function is invoked it will attempt to download 
+#' the data file from the IPEDS website.
 #'
 #' @title getIPEDSSurvey
 #' @param surveyId The survey ID of the dictionary to display (i.e. surveys$SurveyID)
@@ -37,15 +39,21 @@ getIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")) {
 downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")) {
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	#dir = system.file(package="ipeds")
-	file = paste(s[1,'DataFilePre'], formatYear(surveyId, year), s[1,'DataFilePost'], sep='')
+	file = paste(s[1,'DataFilePre'], ipeds:::formatYear(surveyId, year), 
+				 s[1,'DataFilePost'], sep='')
 	url = paste(ipedsDataUrl, file, '.zip', sep='')
 	dir.create(paste(dir, '/data/downloaded/', sep=''), showWarnings=FALSE)
 	dest = paste(dir, "/data/downloaded/", file, '.zip', sep="")
 	download.file(url, dest, mode="wb")
 	unzip(dest, exdir=paste(dir, "/data/downloaded", sep=""))
 	unlink(dest)
-	r = read.csv(paste(dir, "/data/downloaded/", file, ".csv", sep=""))
-	r
+	fname <- paste(dir, "/data/downloaded/", file, ".csv", sep="")
+	if(!file.exists(fname)) {
+		# Check to see if the filename is in lowercase
+		fname <- paste(dir, "/data/downloaded/", tolower(file), ".csv", sep="")
+	}
+	r = read.csv(fname)
+	return(r)
 }
 
 formatYear <- function(surveyId, year) {

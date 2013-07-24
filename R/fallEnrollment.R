@@ -1,4 +1,14 @@
-fallEnrollment <- function(data, mappings=NULL, institutionId=NA, institutionName=NA, documentId='a', createdDate=format(Sys.time(), '%Y-%m-%dT%H:%M:%S'), noteMessage=NA, transmissionType='Original', documentType='IPEDS') {
+#' Internal method.
+#' 
+fallEnrollment <- function(data, 
+						   mappings=NULL, 
+						   institutionId=NA, 
+						   institutionName=NA, 
+						   documentId='a', 
+						   createdDate=format(Sys.time(), '%Y-%m-%dT%H:%M:%S'), 
+						   noteMessage=NA, 
+						   transmissionType='Original', 
+						   documentType='IPEDS') {
 	mappings$MappedColumn = as.character(mappings$MappedColumn)
 	
 	if(is.na(institutionId)) { stop('institutionalId is required') }

@@ -6,6 +6,8 @@ Version: 0.9
 Date: 2010-11-19
 Author: Jason Bryer <jbryer@excelsior.edu>
 Maintainer: Jason Bryer <jbryer@excelsior.edu>
+URL: http://jason.bryer.org/ipeds
+BugReports: https://github.com/jbryer/ipeds/issues
 Depends:
     utils
 Suggests:
@@ -20,7 +22,6 @@ Description: The Integrated Postsecondary Education Data
     download data from the IPEDS website.
 License: GPL
 LazyLoad: yes
-URL: http://ipeds.r-forge.r-project.org
 Collate:
     'completions.R'
     'fallEnrollment.R'
