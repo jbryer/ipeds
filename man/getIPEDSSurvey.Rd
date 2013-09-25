@@ -3,7 +3,8 @@
 \title{getIPEDSSurvey}
 \usage{
   getIPEDSSurvey(surveyId, year,
-    dir = system.file(package = "ipeds"))
+    dir = system.file(package = "ipeds"),
+    stringsAsFactors = FALSE, ...)
 }
 \arguments{
   \item{surveyId}{The survey ID of the dictionary to
@@ -13,6 +14,13 @@
 
   \item{dir}{the directory to download the data to.
   Defaults to the package directory}
+
+  \item{stringsAsFactors}{ogical: should character vectors
+  be converted to factors?  Note that this is overridden by
+  as.is and colClasses, both of which allow finer control.}
+
+  \item{...}{other parmaters passed to
+  \code{\link{read.csv}}}
 }
 \description{
   This function will return the IPEDS survey data for the

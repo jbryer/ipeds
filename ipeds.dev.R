@@ -1,5 +1,4 @@
 require(devtools)
-require(roxygen2)
 
 setwd("c:/Dropbox/My Dropbox/Projects")
 setwd("~/Dropbox/Projects/")

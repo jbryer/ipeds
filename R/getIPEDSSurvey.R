@@ -6,8 +6,13 @@
 #' @param surveyId The survey ID of the dictionary to display (i.e. surveys$SurveyID)
 #' @param year The year of the dictionary to display.
 #' @param dir the directory to download the data to. Defaults to the package directory
+#' @param stringsAsFactors ogical: should character vectors be converted to factors? 
+#'        Note that this is overridden by as.is and colClasses, both of which allow 
+#'        finer control.
+#' @param ... other parmaters passed to \code{\link{read.csv}}
 #' @export
-getIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")) {
+getIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds"),
+						   stringsAsFactors=FALSE, ...) {
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(nrow(s) != 1) {
 		stop(paste('IPEDS survey with id', surveyId, 'not found'))
@@ -21,7 +26,7 @@ getIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")) {
   			r = NULL
   		}
 	} else {
-		r = read.csv(dest)
+		r = read.csv(dest, stringsAsFactors=stringsAsFactors, ...)
 	}
  	if(!is.null(r)) {
 	 	names(r) = tolower(names(r))
@@ -35,8 +40,13 @@ getIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")) {
 #' @param surveyId the survey ID from the surveys data frame
 #' @param year the year of the survey
 #' @param dir the directory to download the data to. Defaults to the package directory
+#' @param stringsAsFactors ogical: should character vectors be converted to factors? 
+#'        Note that this is overridden by as.is and colClasses, both of which allow 
+#'        finer control.
+#' @param ... other parmaters passed to \code{\link{read.csv}}
 #' @export
-downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")) {
+downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds"),
+								stringsAsFactors=FALSE, ...) {
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	#dir = system.file(package="ipeds")
 	file = paste(s[1,'DataFilePre'], ipeds:::formatYear(surveyId, year), 
@@ -52,7 +62,7 @@ downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")
 		# Check to see if the filename is in lowercase
 		fname <- paste(dir, "/data/downloaded/", tolower(file), ".csv", sep="")
 	}
-	r = read.csv(fname)
+	r = read.csv(fname, stringsAsFactors=stringsAsFactors, ...)
 	return(r)
 }
 
