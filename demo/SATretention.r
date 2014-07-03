@@ -60,14 +60,17 @@ ret2$SATWriting75 = as.numeric(ret2$SATWriting75)
 ret2$SATWriting25 = as.numeric(ret2$SATWriting25)
 ret2$SATWriting = (ret2$SATWriting75 + ret2$SATWriting25) / 2
 ret2$SATTotal = ret2$SATMath + ret2$SATWriting
+ret2$NumSATScores <- as.integer(ret2$NumSATScores)
 
 ret2$AcceptanceTotal = as.numeric(ret2$AdmissionsTotal) / as.numeric(ret2$ApplicantsTotal)
 ret2$UseAdmissionTestScores = as.factor(as.character(ret2$UseAdmissionTestScores))
 
 ggplot(ret2, aes(x=SATTotal, y=FullTimeRetentionRate, size=NumSATScores, 
-				 color=UseAdmissionTestScores)) + geom_point()
+				 color=UseAdmissionTestScores)) + 
+	geom_point() + 
+	geom_smooth(method='loess', alpha=0.1)
 
 #Regression
 fit = lm(FullTimeRetentionRate ~ SATWriting + SATMath + AcceptanceTotal + 
-		 	UseAdmissionTestScores, data=ret2, weights=NumSATScores)
+		 	UseAdmissionTestScores, data=ret2, weights=ret2$NumSATScores)
 summary(fit)
