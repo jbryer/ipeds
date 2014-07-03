@@ -1,5 +1,3 @@
-devtools::install_github('jbryer/ipeds')
-
 require(ipeds)
 require(ggplot2)
 require(reshape2)
