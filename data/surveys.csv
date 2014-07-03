@@ -14,8 +14,10 @@ EFFY;Enrollments;12-month unduplicated headcount;EFFY;;4
 EFD1;Enrollments;12-month unduplicated enrollment prior to 2002;EF;D1;4
 EFIA;Enrollments;12-month instructional activity;EFIA;;4
 EFD2;Enrollments;12-month instructional activity prior to 2002;EF;D2;4
+EFCP;Enrollments;”Major field of study, race/ethnicity, gender, attendance status, and level of student”;EF;CP;4
 FLAGS;Enrollments;Response status for all survey components;FLAGS;;4
 C_A;Completions;"Awards/degrees conferred by program (6-digit CIP code), award level, race/ethnicity, and gender";C;_A;4
+CCIP;Completions;”Awards/degrees conferred by program (6-digit CIP code), award level and gender: 1991-92”;C;_CIP;4
 FLAGS;Completions;Response status for all survey components;FLAGS;;4
 SAL_A;Instructional staff/Salaries;"Salaries of full-time instructional faculty, by contract length, gender, and academic rank";SAL;_A;4
 SAL_B;Instructional staff/Salaries;"Fringe benefits of full-time instructional faculty, by contract length";SAL;_B;4
