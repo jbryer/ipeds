@@ -37,21 +37,23 @@ cipcode <- ifelse(grads$cipcode < 10,
 
 grads.math <- grads[substr(grads$cipcode, 1, 5) %in% c('27.01','27.03','27.99'),
 					c('Year','unitid','cipcode','awlevel','ctotalw','ctotalm')]
-
 grads.stat <- grads[substr(grads$cipcode, 1, 5) %in% c('27.05'),
 					c('Year','unitid','cipcode','awlevel','ctotalw','ctotalm')]
-
 grads.cis <- grads[substr(grads$cipcode, 1, 2) %in% c('11'),
 					c('Year','unitid','cipcode','awlevel','ctotalw','ctotalm')]
+grads.all <- grads[,c('Year','unitid','cipcode','awlevel','ctotalw','ctotalm')]
 
-names(grads.math) <- names(grads.stat) <- names(grads.cis) <- 
+names(grads.math) <- names(grads.stat) <- names(grads.cis) <- names(grads.all) <-
 	c('Year','school','cipcode','level','nfemales','nmales')
 
 grads.math$subject <- 'Math'
 grads.stat$subject <- 'Stats'
 grads.cis$subject <- 'CIS'
+grads.all$subject <- 'All'
 
-grads2 <- rbind(grads.math, grads.stat, grads.cis)
+grads2 <- rbind(grads.math, grads.stat, grads.cis, grads.all)
+
+grads2 <- grads2[grads2$level == 5,] # Only look at Bachelor's Degree
 
 grads.sum <- cbind(aggregate(grads2$nfemales, by=list(grads2$subject, grads2$Year), FUN=sum),
                    aggregate(grads2$nmales, by=list(grads2$subject, grads2$Year), FUN=sum)[,3] )
@@ -63,22 +65,29 @@ head(grads.sum)
 grads.sum.melt <- melt(grads.sum[,c('Subject','Year','Female','Male')], id=c('Subject','Year'))
 grads.tot.melt <- melt(grads.sum[,c('Subject','Year','Total')], id=c('Subject','Year'))
 
-ggplot(grads.tot.melt, aes(x=factor(Year), y=value, color=Subject, group=Subject)) + 
+ggplot(grads.tot.melt[grads.tot.melt$Subject != 'All',], 
+	   aes(x=factor(Year), y=value, color=Subject, group=Subject)) + 
 	geom_path(stat='identity') +
 	xlab('Year') + ylab('Number of Graduates')
 
-ggplot(grads.tot.melt, aes(x=factor(Year), y=value, fill=Subject)) + 
+ggplot(grads.tot.melt[grads.tot.melt$Subject != 'All',],
+	   aes(x=factor(Year), y=value, fill=Subject)) + 
 	geom_bar(stat='identity', position='dodge') +
 	xlab('Year') + ylab('Number of Graduates') +
-	ggtitle('Number of Graduates by Year')
+	ggtitle('Number of Baccalaureate Degrees Awarded by Year')
 
-ggplot(grads.sum.melt[grads.sum.melt$variable == 'Female',], 
+grads.female <- grads.sum.melt[grads.sum.melt$variable == 'Female',]
+ggplot(grads.female, 
 	   aes(x=factor(Year), y=value, group=Subject, color=Subject)) +
 	geom_path(stat='identity', alpha=.5) +
-	geom_text(aes(label=paste0(prettyNum(value*100, digits=3), '%')), size=4, vjust=-1) +
+	geom_text(data=grads.female[grads.female$Subject != 'Stats',],
+			  aes(label=paste0(prettyNum(value*100, digits=3), '%')), size=4, vjust=-1) +
+	geom_text(data=grads.female[grads.female$Subject == 'Stats',],
+			  aes(label=paste0(prettyNum(value*100, digits=3), '%')), size=4, vjust=1.1) +
 	scale_y_continuous(labels=percent, limits=c(0,1)) +
 	xlab('Year') + ylab('Percent Female Graduates') +
-	ggtitle('Percent of Female Graduates by Year for CIS, Math, and Statistics Majors') +
+	ggtitle(paste0('Percent of Female Baccalaureate Degrees Awarded\n',
+				   'by Year for CIS, Math, and Statistics Majors')) +
 	annotate('text', x='2000', y=0, size=3, hjust=0,
 			 label='Data Source: Integrated Postsecondary Education Data System')
 
