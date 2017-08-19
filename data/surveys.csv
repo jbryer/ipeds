@@ -1,6 +1,6 @@
 SurveyID;Survey;Title;DataFilePre;DataFilePost;YearFormat
 HD;Institutional Characteristics;Directory information;HD;;4
-IC;Institutional Characteristics;"Educational offerings, organization, admissions, services and athletic associations";IC;;4
+IC;Institutional Characteristics;Educational offerings, organization, admissions, services and athletic associations;IC;;4
 IC_AY;Institutional Characteristics;Student charges for academic year programs;IC;_AY;4
 IC_PY;Institutional Characteristics;Student charges by program (vocational programs);IC;_PY;4
 FLAGS;Institutional Characteristics;Response status for all survey components;FLAGS;;4
