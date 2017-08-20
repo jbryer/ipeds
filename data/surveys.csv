@@ -1,4 +1,5 @@
 SurveyID;Survey;Title;DataFilePre;DataFilePost;YearFormat
+ADM;Admission and Test Scores;Admission considerations, applications, admissions, enrollees and test scores;ADM;;4
 HD;Institutional Characteristics;Directory information;HD;;4
 IC;Institutional Characteristics;Educational offerings, organization, admissions, services and athletic associations;IC;;4
 IC_AY;Institutional Characteristics;Student charges for academic year programs;IC;_AY;4
