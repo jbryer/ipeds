@@ -23,7 +23,7 @@ FLAGS;Completions;Response status for all survey components;FLAGS;;4
 SAL_A;Instructional staff/Salaries;Salaries of full-time instructional faculty, by contract length, gender, and academic rank;SAL;_A;4
 SAL_B;Instructional staff/Salaries;Fringe benefits of full-time instructional faculty, by contract length;SAL;_B;4
 SAL_FACULTY;Instructional staff/Salaries;Tenure status of full-time instructional faculty in 4-year institutions, by contract length, gender, and academic rank;SAL;_FACULTY;4
-SAL_A_LT9;Instructional staff/Salaries;"Number of full-time instructional faculty with less than 9-month contracts, by gender and academic rank";SAL;_A_LT9;4
+SAL_A_LT9;Instructional staff/Salaries;Number of full-time instructional faculty with less than 9-month contracts, by gender and academic rank;SAL;_A_LT9;4
 FLAGS;Instructional staff/Salaries;Response status for all survey components;FLAGS;;4
 S_ABD;Fall Staff;Employees by primary occupation, salary categories, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees);S;_ABD;4
 S_F;Fall Staff;Full-time instruction/research/public service staff, by tenure status, academic rank, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees);S;_F;4
