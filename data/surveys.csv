@@ -1,5 +1,4 @@
 SurveyID;Survey;Title;DataFilePre;DataFilePost;YearFormat
-ADM;Admission and Test Scores;Admission considerations, applications, admissions, enrollees and test scores;ADM;;4
 HD;Institutional Characteristics;Directory information;HD;;4
 IC;Institutional Characteristics;Educational offerings, organization, admissions, services and athletic associations;IC;;4
 IC_AY;Institutional Characteristics;Student charges for academic year programs;IC;_AY;4
@@ -39,3 +38,4 @@ GR;Graduation Rates;Graduation rate data, 150% of normal time to complete;GR;;4
 GR_L2;Graduation Rates;Graduation rate data, 150% of normal time to complete;GR;_L2;4
 GR200;Graduation Rates;Graduation rate data, 200% of normal time to complete;GR200_;;2
 SFA;Student Financial Aid and Net Price;Student Financial Aid and Net Price;SFA;;22
+ADM;Admission and Test Scores;Admission considerations, applications, admissions, enrollees and test scores;ADM;;4
