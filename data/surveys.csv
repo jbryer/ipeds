@@ -15,27 +15,27 @@ EFFY;Enrollments;12-month unduplicated headcount;EFFY;;4
 EFD1;Enrollments;12-month unduplicated enrollment prior to 2002;EF;D1;4
 EFIA;Enrollments;12-month instructional activity;EFIA;;4
 EFD2;Enrollments;12-month instructional activity prior to 2002;EF;D2;4
-EFCP;Enrollments;”Major field of study, race/ethnicity, gender, attendance status, and level of student”;EF;CP;4
+EFCP;Enrollments;Major field of study, race/ethnicity, gender, attendance status, and level of student;EF;CP;4
 FLAGS;Enrollments;Response status for all survey components;FLAGS;;4
-C_A;Completions;"Awards/degrees conferred by program (6-digit CIP code), award level, race/ethnicity, and gender";C;_A;4
-CCIP;Completions;”Awards/degrees conferred by program (6-digit CIP code), award level and gender: 1991-92”;C;_CIP;4
+C_A;Completions;Awards/degrees conferred by program (6-digit CIP code), award level, race/ethnicity, and gender;C;_A;4
+CCIP;Completions;Awards/degrees conferred by program (6-digit CIP code), award level and gender: 1991-92;C;_CIP;4
 FLAGS;Completions;Response status for all survey components;FLAGS;;4
-SAL_A;Instructional staff/Salaries;"Salaries of full-time instructional faculty, by contract length, gender, and academic rank";SAL;_A;4
-SAL_B;Instructional staff/Salaries;"Fringe benefits of full-time instructional faculty, by contract length";SAL;_B;4
-SAL_FACULTY;Instructional staff/Salaries;"Tenure status of full-time instructional faculty in 4-year institutions, by contract length, gender, and academic rank";SAL;_FACULTY;4
+SAL_A;Instructional staff/Salaries;Salaries of full-time instructional faculty, by contract length, gender, and academic rank;SAL;_A;4
+SAL_B;Instructional staff/Salaries;Fringe benefits of full-time instructional faculty, by contract length;SAL;_B;4
+SAL_FACULTY;Instructional staff/Salaries;Tenure status of full-time instructional faculty in 4-year institutions, by contract length, gender, and academic rank;SAL;_FACULTY;4
 SAL_A_LT9;Instructional staff/Salaries;"Number of full-time instructional faculty with less than 9-month contracts, by gender and academic rank";SAL;_A_LT9;4
 FLAGS;Instructional staff/Salaries;Response status for all survey components;FLAGS;;4
-S_ABD;Fall Staff;"Employees by primary occupation, salary categories, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees)";S;_ABD;4
-S_F;Fall Staff;"Full-time instruction/research/public service staff, by tenure status, academic rank, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees)";S;_F;4
-S_G;Fall Staff;"New hires by primary occupation, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees)";S;_G;4
-S_CN;Fall Staff;"Employees by primary occupation, race/ethnicity, and gender (Degree-granting institutions with less than 15 full-time employees and all nondegree-granting institutions)";S;_CN;4
+S_ABD;Fall Staff;Employees by primary occupation, salary categories, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees);S;_ABD;4
+S_F;Fall Staff;Full-time instruction/research/public service staff, by tenure status, academic rank, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees);S;_F;4
+S_G;Fall Staff;New hires by primary occupation, race/ethnicity, and gender (Degree-granting institutions with 15 or more full-time employees);S;_G;4
+S_CN;Fall Staff;Employees by primary occupation, race/ethnicity, and gender (Degree-granting institutions with less than 15 full-time employees and all nondegree-granting institutions);S;_CN;4
 FLAGS;Fall Staff;Response status for all survey components;FLAGS;;4
-EAP;Employees by Assigned Position;"Employees by faculty status, primary function/occupational activity";EAP;;4
+EAP;Employees by Assigned Position;Employees by faculty status, primary function/occupational activity;EAP;;4
 FLAGS;Employees by Assigned Position;Response status for all survey components;FLAGS;;4
-F_F1A;Finance;"Public institutions - GASB 34/35 Fiscal year";F;_F1A;22
-F_F2;Finance;"Private not-for-profit institutions or Public institutions using FASB Fiscal year";F;_F2;22
-F_F3;Finance;"Private for-profit institutions Fiscal year";F;_F3;22
-GR;Graduation Rates;"Graduation rate data, 150% of normal time to complete";GR;;4
-GR_L2;Graduation Rates;"Graduation rate data, 150% of normal time to complete";GR;_L2;4
-GR200;Graduation Rates;"Graduation rate data, 200% of normal time to complete";GR200_;;2
+F_F1A;Finance;Public institutions - GASB 34/35 Fiscal year;F;_F1A;22
+F_F2;Finance;Private not-for-profit institutions or Public institutions using FASB Fiscal year;F;_F2;22
+F_F3;Finance;Private for-profit institutions Fiscal year;F;_F3;22
+GR;Graduation Rates;Graduation rate data, 150% of normal time to complete;GR;;4
+GR_L2;Graduation Rates;Graduation rate data, 150% of normal time to complete;GR;_L2;4
+GR200;Graduation Rates;Graduation rate data, 200% of normal time to complete;GR200_;;2
 SFA;Student Financial Aid and Net Price;Student Financial Aid and Net Price;SFA;;22
