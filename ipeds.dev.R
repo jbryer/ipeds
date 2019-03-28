@@ -1,17 +1,16 @@
 require(devtools)
 
-setwd("c:/Dropbox/My Dropbox/Projects")
-setwd("~/Dropbox/Projects/")
-
-document("ipeds")
-check_doc('ipeds')
-build("ipeds", path='..')
-build("ipeds", path='..', binary=TRUE)
-check("ipeds")
-install("ipeds")
+document()
+build()
+check()
+install()
 
 library(ipeds)
 data(surveys)
 ls('package:ipeds')
+
+# This is where the data files will be downloaded by default
 system.file(package='ipeds')
+
+# Depracted methods
 downloadAllSurveys(2010)

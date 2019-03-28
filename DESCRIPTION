@@ -1,15 +1,14 @@
 Package: ipeds
 Type: Package
-Title: Integrated Postsecondary Education Data System
-    (IPEDS) Access
-Version: 0.9
-Date: 2010-11-19
+Title: Integrated Postsecondary Education Data System (IPEDS) Access
+Version: 2.0
+Date: 2019-03-26
 Author: Jason Bryer <jbryer@excelsior.edu>
 Maintainer: Jason Bryer <jbryer@excelsior.edu>
 URL: http://jason.bryer.org/ipeds
 BugReports: https://github.com/jbryer/ipeds/issues
 Depends:
-    utils
+    utils, RCurl, Hmisc, reshape2
 Suggests:
     XML
 Description: The Integrated Postsecondary Education Data
@@ -31,3 +30,5 @@ Collate:
     'package.R'
     'recode.R'
     'twelveMonthEnrollment.R'
+RoxygenNote: 6.1.1
+Encoding: UTF-8 

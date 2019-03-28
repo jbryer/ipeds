@@ -1,4 +1,8 @@
-#' This function will open the dictionary for the given IPEDS survey and year. Note that the first time this function is invoked it will attempt to download the dictionary file from the IPEDS website.
+#' View the data dictionary for the given survey and year.
+#' 
+#' This function will open the dictionary for the given IPEDS survey and year. 
+#' Note that the first time this function is invoked it will attempt to download 
+#' the dictionary file from the IPEDS website.
 #'
 #' @title ipedsHelp
 #' @param surveyId The survey ID of the dictionary to display (i.e. surveys$SurveyID)
@@ -27,6 +31,11 @@ ipedsHelp <- function(surveyId, year) {
 	browseURL(paste(dir, '/data/dict/', file, sep=''))
 }
 
+#' Download the data dictionary for the given year.
+#' 
+#' Internal function.
+#' 
+#' @param year the IPEDS year to download the data dictionary.
 downloadHelp <- function(year) {
 	dir = system.file(package="ipeds")
 	dir.create(paste(dir, '/data/dict/', sep=''), showWarnings=FALSE)
