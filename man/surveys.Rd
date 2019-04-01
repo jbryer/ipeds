@@ -8,6 +8,7 @@
 List of available surveys to load from IPEDS
 }
 \references{
-National Center for Educational Statistics. Integrated Postsecondary Education Data System \url{https://surveys.nces.ed.gov/ipeds/}
+National Center for Educational Statistics. Integrated 
+     Postsecondary Education Data System \url{https://surveys.nces.ed.gov/ipeds/}
 }
 \keyword{data}

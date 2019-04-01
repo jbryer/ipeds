@@ -2,7 +2,7 @@
 % Please edit documentation in R/ipeds_survey.R
 \name{ipeds_survey}
 \alias{ipeds_survey}
-\title{Returns}
+\title{IPEDS Survey Table}
 \usage{
 ipeds_survey(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
   dir = paste0(system.file(package = "ipeds"), "/data/downloaded/"),
@@ -15,6 +15,12 @@ ipeds_survey(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
 
 \item{table}{the IPEDS survey result to return.}
 }
+\value{
+a data.frame
+}
 \description{
-Returns
+This function returns the data for the specified table and year. The table
+can be specified using either the full table name within the original database
+(e.g. "HD2017") or with just the survey ID as specified in the \code{data(surveys)}
+data frame (e.g. "HD").
 }

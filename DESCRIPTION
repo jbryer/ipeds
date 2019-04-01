@@ -2,23 +2,20 @@ Package: ipeds
 Type: Package
 Title: Integrated Postsecondary Education Data System (IPEDS) Access
 Version: 2.0
-Date: 2019-03-26
+Date: 2019-04-01
 Author: Jason Bryer <jason@bryer.org>
 Maintainer: Jason Bryer <jason@bryer.org>
 URL: https://github.com/jbryer/ipeds
 BugReports: https://github.com/jbryer/ipeds/issues
 Depends:
-    utils, RCurl, Hmisc, reshape2
+    utils, RCurl, Hmisc
 Suggests:
-    XML, psych, xtable
+    reshape2, ggplot2, scales
 Description: The Integrated Postsecondary Education Data
     System (IPEDS) is the core postsecondary education data
     collection system for the National Center for Education
-    Statistics (NCES). IPEDS provides a mechanism to upload
-    survey data from institutions in XML format. This
-    package provides functions to assist in the generating
-    XML files that can then be uploaded to IPEDS as well as
-    download data from the IPEDS website.
+    Statistics (NCES). This package provides functions to assist in the
+    downloading and loading of data and data dictionaries from the IPEDS website.
 License: GPL
 LazyLoad: yes
 RoxygenNote: 6.1.1

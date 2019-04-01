@@ -1,4 +1,7 @@
-#' Returns what IPEDS databases are available.
+#' Available IPEDS databases
+#' 
+#' This function will return a data frame listing status of available IPEDS
+#' databases since 2007, including the download status.
 #' 
 #' @param dir directory where IPEDS databases are to be downloaded.
 #' @return a data.frame with final and provisional columns indicating whether

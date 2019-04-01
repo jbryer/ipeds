@@ -2,7 +2,7 @@
 % Please edit documentation in R/available_IPEDS.R
 \name{available_ipeds}
 \alias{available_ipeds}
-\title{Returns what IPEDS databases are available.}
+\title{Available IPEDS databases}
 \usage{
 available_ipeds(dir = paste0(system.file(package = "ipeds"),
   "/data/downloaded/"))
@@ -16,5 +16,6 @@ a data.frame with final and provisional columns indicating whether
         indicates whether that database has already been downloaded.
 }
 \description{
-Returns what IPEDS databases are available.
+This function will return a data frame listing status of available IPEDS
+databases since 2007, including the download status.
 }

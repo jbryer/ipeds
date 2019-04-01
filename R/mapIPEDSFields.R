@@ -1,4 +1,5 @@
-#' This function creates a mapping between the field (column) names from source data frame and the names used by the ipeds package.
+#' This function creates a mapping between the field (column) names from source 
+#' data frame and the names used by the ipeds package.
 #'
 #' @title mapIPEDSFields
 #' @param programCIPCode The name of the column containing the CIP codes.

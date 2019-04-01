@@ -1,8 +1,3 @@
-# Page containing the links to download the files.
-ipeds.download.page <- 'https://nces.ed.gov/ipeds/use-the-data/download-access-database'
-# File name fomrat: IPEDS_2017-18_Provisional.zip or IPEDS_2017-18_Final.zip
-ipeds.base.url <- 'https://nces.ed.gov/ipeds/tablefiles/zipfiles/'
-
 #' Downloads IPEDS data for a given year.
 #' 
 #' This function will download IPEDS data in MS Access file format. By default,
@@ -26,15 +21,17 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 						  cleanup = FALSE,
 						  ...) {
 	if(length(year) > 1) {
+		status <- TRUE
 		for(i in year) {
-			download_ipeds(year = i,
+			status <- status &
+				download_ipeds(year = i,
 						   dir = dir,
 						   userProvisional = useProvisional,
 						   force = force,
 						   cleanup = cleanup,
 						   ...)
 		}
-		return()
+		invisible(status)
 	}
 	
 	dir <- paste0(dir, '/')
@@ -72,11 +69,8 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 					'Downloaded file: ', dest,
 					'File not found: ', accdb.file))
 	}
-	
-	# db <- RODBC::odbcConnect(paste0("Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=", 
-	# 								accdb.file))
-	# 
-	# db <- RODBC::odbcConnect(accdb.file)
+
+	# Need to have mdtools installed. From the terminal (on Mac):	
 	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 	# brew install mdbtools
 	tryCatch({
@@ -100,9 +94,3 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	
 	invisible(TRUE)
 }
-
-getYearString <- function(year) {
-	paste0((year - 1), '-', ifelse(year %% 1000 < 10, '0', ''), (year %% 1000))
-}
-
-

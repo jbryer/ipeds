@@ -10,10 +10,11 @@
 #' @param noteMessage Optional note message to include in the generated file.
 #' @param transmissionType Either original for first upload or replace.
 #' @param documentType Defaults to application
-#' @export
 completions <- function(data, mappings=NULL, institutionId=NA, institutionName=NA, 
 			documentId='a', createdDate=format(Sys.time(), '%Y-%m-%dT%H:%M:%S'), 
 			noteMessage=NA, transmissionType='Original', documentType='Application') {
+	warning("This function has been departed and will be removed in a future version.")
+	
 	#Possible values for transmissionType: Duplicate, MutuallyDefined, Original, Reissue, Replace, Resubmission
 	mappings$MappedColumn = as.character(mappings$MappedColumn)
 

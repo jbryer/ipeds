@@ -12,5 +12,5 @@ a list with all tables (as data.frames) for the given year.
 }
 \description{
 This function will return a large list with all the tables for a given IPEDS
-year.
+year. It is recommended to use the \code{\link{ipeds_survey}} function instead.
 }

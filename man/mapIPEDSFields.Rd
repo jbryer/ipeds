@@ -22,5 +22,6 @@ mapIPEDSFields(programCIPCode, educationalProgramType,
 \item{genderColumn}{The name of the column containing student genders.}
 }
 \description{
-This function creates a mapping between the field (column) names from source data frame and the names used by the ipeds package.
+This function creates a mapping between the field (column) names from source 
+data frame and the names used by the ipeds package.
 }

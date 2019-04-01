@@ -1,7 +1,13 @@
-#' Returns
+#' IPEDS Survey Table
+#' 
+#' This function returns the data for the specified table and year. The table
+#' can be specified using either the full table name within the original database
+#' (e.g. "HD2017") or with just the survey ID as specified in the \code{data(surveys)}
+#' data frame (e.g. "HD").
 #' 
 #' @inheritParams download_ipeds
 #' @param table the IPEDS survey result to return.
+#' @return a data.frame
 #' @export
 ipeds_survey <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 						 dir = paste0(system.file(package="ipeds"), '/data/downloaded/'),

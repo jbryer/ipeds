@@ -15,6 +15,7 @@ getIPEDSSurvey <- function(surveyId, year,
 						   dir = system.file(package="ipeds"),
 						   stringsAsFactors = FALSE, ...) {
 	warning("This function has been departed and will be removed in a future version. Use ipeds_survey instead.")
+	
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(nrow(s) != 1) {
 		stop(paste('IPEDS survey with id', surveyId, 'not found'))
@@ -49,6 +50,8 @@ getIPEDSSurvey <- function(surveyId, year,
 #' @export
 downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds"),
 								stringsAsFactors=FALSE, ...) {
+	warning("This function has been departed and will be removed in a future version. Use download_ipeds instead.")
+
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	#dir = system.file(package="ipeds")
 	file = paste(s[1,'DataFilePre'], ipeds:::formatYear(surveyId, year), 
@@ -68,19 +71,6 @@ downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")
 	return(r)
 }
 
-formatYear <- function(surveyId, year) {
-	s = surveys[which(surveys$SurveyID==surveyId),]
-	if(s['YearFormat'] == 4) {
-		year = as.character(year)
-	} else if(s['YearFormat'] == 2) {
-		year = substr(year, 3,4)
-	} else if(s['YearFormat'] == 22) {
-		year = paste(substr((year-1), 3,4), substr(year, 3,4), sep='')
-	} else if(s['YearFormat'] == 44) {
-		year = paste((year-1), year, sep='')
-	}
-	year
-}
 
 #' Downloads all available surveys for the given year.
 #' 
@@ -89,6 +79,8 @@ formatYear <- function(surveyId, year) {
 #' @param ... other parameters passed to \code{\link{downloadIPEDSSurvey}}
 #' @export
 downloadAllSurveys <- function(year, ...) {
+	warning("This function has been departed and will be removed in a future version. Use download_ipeds instead.")
+	
 	for(i in 1:nrow(surveys)) {
 		tryCatch(downloadIPEDSSurvey(surveys[i,'SurveyID'], year, ...), error=function(e) { warning(paste("Error downloading survey:",surveys[i,'SurveyID'], surveys[i,'Title'])) })
 	}
