@@ -9,9 +9,9 @@
 #' @param table the IPEDS survey result to return.
 #' @return a data.frame
 #' @export
-ipeds_survey <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
-						 dir = paste0(system.file(package="ipeds"), '/data/downloaded/'),
-						 table) {
+ipeds_survey <- function(table,
+						 year = as.integer(format(Sys.Date(), '%Y')) - 1,
+						 dir = getOption('ipeds.download.dir')) {
 	db <- load_ipeds(year = year, dir = dir)
 	df <- db[[table]]
 	if(is.null(df)) {

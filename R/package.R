@@ -31,4 +31,9 @@ ipedsDataUrl <- 'http://nces.ed.gov/ipeds/datacenter/data/'
 						  'BlackOrAfricanAmerican', 'NativeHawaiianOrPacificIslander', 
 						  'White', 'TwoOrMoreRaces', 'NonresidentAlien', 'RaceEthnicityUnknown')
 	genderLevels <<- c('Male', 'Female')
+	if(is.null(getOption('ipeds.download.dir'))) {
+		dir <- paste0(system.file(package="ipeds"), '/data/downloaded/')
+		# message(paste0('IPEDS data files will be downloaded to ', dir))
+		options('ipeds.download.dir' = dir)
+	}
 }

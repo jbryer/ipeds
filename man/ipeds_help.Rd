@@ -4,16 +4,15 @@
 \alias{ipeds_help}
 \title{Returns data.frame with the data dictionary.}
 \usage{
-ipeds_help(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = paste0(system.file(package = "ipeds"), "/data/downloaded/"),
-  table)
+ipeds_help(table, year = as.integer(format(Sys.Date(), "\%Y")) - 1,
+  dir = getOption("ipeds.download.dir"))
 }
 \arguments{
+\item{table}{if specified, the variable information for the given survey result table is returned.}
+
 \item{year}{the year of the survey}
 
 \item{dir}{the directory to download the data to. Defaults to the package directory.}
-
-\item{table}{if specified, the variable information for the given survey result table is returned.}
 }
 \description{
 This will return a data.frame with a list of all the tables available for the given

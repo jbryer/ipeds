@@ -7,9 +7,9 @@
 #' @inheritParams download_ipeds
 #' @param table if specified, the variable information for the given survey result table is returned.
 #' @export
-ipeds_help <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
-					   dir = paste0(system.file(package="ipeds"), '/data/downloaded/'),
-					   table) {
+ipeds_help <- function(table,
+					   year = as.integer(format(Sys.Date(), '%Y')) - 1,
+					   dir = getOption('ipeds.download.dir')) {
 	db <- load_ipeds(year = year, dir = dir)
 	year2 <- (year-1) %% 1000
 	year2 <- ifelse(year2 < 10, paste0('0', year2), as.character(year2))

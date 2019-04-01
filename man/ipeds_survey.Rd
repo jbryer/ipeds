@@ -4,16 +4,15 @@
 \alias{ipeds_survey}
 \title{IPEDS Survey Table}
 \usage{
-ipeds_survey(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = paste0(system.file(package = "ipeds"), "/data/downloaded/"),
-  table)
+ipeds_survey(table, year = as.integer(format(Sys.Date(), "\%Y")) - 1,
+  dir = getOption("ipeds.download.dir"))
 }
 \arguments{
+\item{table}{the IPEDS survey result to return.}
+
 \item{year}{the year of the survey}
 
 \item{dir}{the directory to download the data to. Defaults to the package directory.}
-
-\item{table}{the IPEDS survey result to return.}
 }
 \value{
 a data.frame

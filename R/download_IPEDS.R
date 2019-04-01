@@ -15,11 +15,11 @@
 #' @return TRUE if the data has been successfully downloaded.
 #' @export
 download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1, 
-						  dir = paste0(system.file(package="ipeds"), '/data/downloaded'), 
-						  useProvisional = TRUE,
-						  force = FALSE,
-						  cleanup = FALSE,
-						  ...) {
+						   dir = paste0(system.file(package="ipeds"), '/data/downloaded'), 
+						   useProvisional = TRUE,
+						   force = FALSE,
+						   cleanup = FALSE,
+						   ...) {
 	if(length(year) > 1) {
 		status <- TRUE
 		for(i in year) {

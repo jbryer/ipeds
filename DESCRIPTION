@@ -10,7 +10,7 @@ BugReports: https://github.com/jbryer/ipeds/issues
 Depends:
     utils, RCurl, Hmisc
 Suggests:
-    reshape2, ggplot2, scales
+    reshape2, ggplot2, scales, knitr, rmarkdown
 Description: The Integrated Postsecondary Education Data
     System (IPEDS) is the core postsecondary education data
     collection system for the National Center for Education
@@ -20,3 +20,4 @@ License: GPL
 LazyLoad: yes
 RoxygenNote: 6.1.1
 Encoding: UTF-8
+VignetteBuilder: knitr 

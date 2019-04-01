@@ -10,28 +10,39 @@ ls('package:ipeds')
 data(package = 'ipeds')
 
 # This is where the data files will be downloaded by default
-paste0(system.file(package="ipeds"), '/data/downloaded/')
+(ipeds.dir.sys <- paste0(system.file(package="ipeds"), '/data/downloaded/'))
 # For development purposes, we will save IPEDS data files here (to save across installs)
-ipeds.dir <- 'data-raw'
+(ipeds.dir <- 'data-raw')
+
+options('ipeds.download.dir' = ipeds.dir)
+getOption('ipeds.download.dir')
+
+# This will copy pre-processed data files in the data-raw to the system location.
+# This is convenient for testing purposes since each install will delete the data
+# files in the system's R package directory.
+# ipeds.files <- list.files(ipeds.dir, pattern = '*.Rda')
+# dir.create(ipeds.dir.sys, recursive = TRUE)
+# file.copy(from = paste0(ipeds.dir, '/', ipeds.files),
+# 		  to = paste0(ipeds.dir.sys, '/', ipeds.files))
 
 # What IPEDS databases are available?
-available_ipeds(dir = ipeds.dir)
+available_ipeds()
 
 # Download IPEDS data files
-download_ipeds(year = 2018:2017, dir = ipeds.dir)
-# download_ipeds(year = 2016:2007, dir = ipeds.dir)
+download_ipeds(year = 2018:2017) # May want to copy to system folder (see above)
+# download_ipeds(year = 2016:2007)
 tools::resaveRdaFiles(ipeds.dir) # Compress the data files further
 
 # Get all the tables for a given year
-ipeds <- load_ipeds(year = 2018, dir = ipeds.dir)
+ipeds <- load_ipeds(year = 2018)
 names(ipeds)
 
 # Data dictionaries
-View(ipeds_help(2018, dir = ipeds.dir))
-View(ipeds_help(2018, table = 'HD', dir = ipeds.dir))
+View(ipeds_help(2018))
+View(ipeds_help(2018, table = 'HD'))
 
 # Get the directory table.
-ipeds.directory <- ipeds_survey(2018, table = 'HD', dir = ipeds.dir) # Directory table
+ipeds.directory <- ipeds_survey(2018, table = 'HD') # Directory table
 dim(ipeds.directory)
 
 # This is the list of available survey tables. This may not be exhaustive.
@@ -42,7 +53,7 @@ View(surveys)
 ################################################################################
 # Tables in the most recent database that are not in the data(surveys) data.frame.
 # This will edit the data/surveys.Rda file with new survey IDs.
-current.tables <- ipeds_help(dir = ipeds.dir)
+current.tables <- ipeds_help()
 year <- as.integer(format(Sys.Date(), '%Y')) - 2
 table.names <- paste0(
 	as.character(surveys$DataFilePre),

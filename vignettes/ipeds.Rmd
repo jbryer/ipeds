@@ -1,0 +1,105 @@
+---
+title: "Integrated Postsecondary Education Data System (IPEDS) Access"
+author: "Jason Bryer, Ph.D."
+date: "`r format(Sys.Date(), '%B %d, %Y')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{IPEDS R Package}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+# knitr::opts_chunk$set(tidy.opts = list(blank = FALSE, width.cutoff = 100))
+options(width = 100)
+library(knitr)
+```
+
+# Introduction
+
+The [Integrated Postsecondary Education Data System](https://nces.ed.gov/ipeds) (IPEDS) is a data system maintained by the U.S. Department of Education's [National Center for Education Statistics](https://nces.ed.gov/) (NCES) to provide information about colleges, universities, and other institutions that participate in federal student financial aid programs. IPEDS collects data from institutions on institutional characteristics, student enrollments, degree completions, institutional staff (including headcounts and salaries), graduation rates, and admissions (see Appendix A for a more complete list of available data). NCES makes these data publicly available for download [^1] in Microsoft Access format. This package provides functions to facilitate downloading and converting the MS Access database files to R data frames.
+
+[^1]: Direct access to downloaded files: https://nces.ed.gov/ipeds/use-the-data/download-access-database
+
+# Installation
+
+The latest version of the `ipeds` R package can be downloaded using the `devtools` package from Github.
+
+```{r installation, echo=TRUE, eval=FALSE}
+devtools::install_github('jbryer/ipeds')
+```
+
+This package utilizes the `mdb.get` function in the `Hmisc` package. For users on Mac or Linux computers, the [`mdbtools`](https://github.com/brianb/mdbtools) system tools to be installed as well. Using [Homebrew](https://brew.sh/)[^2] on Mac, executing the following command in the terminal will install the necessary application.
+
+```
+brew install mdbtools
+```
+
+[^2]: Homebrew can be installed using the following command in the Mac terminal: `ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')`
+
+Once installed, the package can be loaded using the `library` command.
+
+```{r loading, message=FALSE, warning=FALSE}
+library(ipeds)
+```
+
+# Downloading IPEDS Data
+
+Working with IPEDS data vis-à-vis this package is typically a two step process: First the data must be downloaded and processed and second, the data is loaded into the R session. The former step is only necessary once per R or package installation. By default, the `ipeds` package will save downloaded data files into the system's package directory. The following command will return the default download location for your system.
+
+```{r download_directory, eval=FALSE}
+getOption('ipeds.download.dir')
+```
+
+It should be noted that data files downloaded to the package directory will be deleted for each new R or `ipeds` installation. The default location to download data files can be changed by specifying the `ipeds.download.dir` system property using the `options` command.
+
+```{r download_directory_set, eval=FALSE}
+options('ipeds.download.dir' = 'MY_IPEDS_DATA_DIRECTORY')
+```
+
+The `download_ipeds` function will download all data files for the specified year(s). The data files are generally around 50MB and therefore can take a long time to download.
+
+```{r download_ipeds, eval=FALSE}
+download_ipeds()
+```
+
+The following parameters are available for the `download_ipeds` function:
+
+* `year` - the years to download. IPEDS organizes data into academic years. The year specified is the ending year. For example, `year = 2018` would download the database for the 2017-18 academic year.
+* `dir` - the directory to download the IPEDS data files to. This will override the `ipeds.download.dir` system property.
+* `useProvisional` - indicates whether a provisional database (if available) be downloaded if the final version is not.
+* `cleanup` - indicates whether the function should delete any intermediate files downloaded (e.g. zip files) or extracted (e.g. accdb files).
+
+The `available_ipeds` function returns a `data.frame` with a summary of the available IPEDS data files along with the download status of those files.
+
+```{r available_ipeds}
+available_ipeds()
+```
+
+
+# Data Dictionaries
+
+NCES provides data dictionaries with the IPEDS data. There are two main data frames that summarize the data that is available in any year, one describes all the data tables available and the other describes the variables within a data table. Both these data dictionaries are available using the `ipeds_help` function. 
+
+The `table` parameter can be either the short `surveyID` from the `data(surveys)` data frame (see Appendix A), or the full table name in the result above. For example, `ipeds_help('HD2017', year = 2018)` and `ipeds_help('HD', year = 2018)` will return the same data frame. The advantage of the latter approach is that specific surveys can be retrieved across years. That is, `ipeds_help('HD')` will always return the directory information data frame for the most current IPEDS database.
+
+# Getting Data
+
+The `ipeds_survey` will load a specific data table for the given year (the most recent year by default).
+
+```{r ipeds_survey, eval=FALSE}
+ipeds.hd <- ipeds_survey('HD')
+```
+
+Alternatively, the `load_ipeds` function will return a list with all the data tables for the given year.
+
+
+# Appendix A: Surveys
+
+The following tables contains all the surveys listed in the `data(surveys)` data frame. The `surveyID` variable can be used with the `ipeds_survey` and `ipeds_help` functions. Using this ID allows you to reference an IPEDS survey data table without a specific year. This is the preferred method for getting survey data, however there may be data tables in a particular release that are not references in this table. You can get those by specifying the full table name as referenced in the results of the `ipeds_help()` function.
+
+```{r surveys, echo=FALSE, results='asis'}
+data(surveys)
+knitr::kable(surveys[,1:3], row.names = FALSE)
+```
+
