@@ -58,10 +58,11 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 
 	if(!file.exists(dest) | force) {
 		download.file(url, dest, mode="wb")
-		unzip(dest, exdir=dir)
 	} else {
 		message('Zip file already downloaded. Set force=TRUE to redownload.')
 	}
+
+	unzip(dest, exdir=dir)
 	
 	accdb.file <- paste0(dir, 'IPEDS', (year - 1), (year %% 1000), '.accdb')
 	if(!file.exists(accdb.file)) {
@@ -74,7 +75,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 	# brew install mdbtools
 	tryCatch({
-		db <- Hmisc::mdb.get(accdb.file)
+		db <- Hmisc::mdb.get(accdb.file, stringsAsFactors = FALSE)
 		save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
 	}, error = function(e) {
 		print('Error loading the MS Access database file. Make sure mdtools is installed.')

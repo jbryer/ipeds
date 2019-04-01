@@ -6,6 +6,9 @@
 \usage{
 getYearString(year)
 }
+\arguments{
+\item{year}{the IPEDS release year.}
+}
 \value{
 a string with the cohort year
 }

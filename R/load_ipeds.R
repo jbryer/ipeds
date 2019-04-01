@@ -3,7 +3,7 @@
 #' This function will return a large list with all the tables for a given IPEDS
 #' year. It is recommended to use the \code{\link{ipeds_survey}} function instead.
 #' 
-#' @inheritParams download_IPEDS
+#' @inheritParams download_ipeds
 #' @return a list with all tables (as data.frames) for the given year.
 #' @export
 load_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,

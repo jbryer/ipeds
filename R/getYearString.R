@@ -3,7 +3,7 @@
 #' IPEDS uses a YYYY-YY format for dates in files. For 2018 data release, the
 #' date format would be 2017-18.
 #' 
-#' @param year
+#' @param year the IPEDS release year.
 #' @return a string with the cohort year
 getYearString <- function(year) {
 	paste0((year - 1), '-', ifelse(year %% 1000 < 10, '0', ''), (year %% 1000))
@@ -11,6 +11,10 @@ getYearString <- function(year) {
 
 #' Formats the year for a specific survey.
 #' 
+#' Returns the formatted year for the given survey.
+#' 
+#' @param surveyId the survey ID from the data(surveys) data.frame.
+#' @param year the IPEDS release year.
 formatYear <- function(surveyId, year) {
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(s['YearFormat'] == 4) {

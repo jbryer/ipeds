@@ -31,9 +31,9 @@ S_CN;Fall Staff;Employees by primary occupation, race/ethnicity, and gender (Deg
 FLAGS;Fall Staff;Response status for all survey components;FLAGS;;4
 EAP;Employees by Assigned Position;Employees by faculty status, primary function/occupational activity;EAP;;4
 FLAGS;Employees by Assigned Position;Response status for all survey components;FLAGS;;4
-F_F1A;Finance;Public institutions - GASB 34/35 Fiscal year;F;_F1A;22
-F_F2;Finance;Private not-for-profit institutions or Public institutions using FASB Fiscal year;F;_F2;22
-F_F3;Finance;Private for-profit institutions Fiscal year;F;_F3;22
+F_F1A;Finance;Public institutions - GASB 34/35 Fiscal year;F;_F1A;2
+F_F2;Finance;Private not-for-profit institutions or Public institutions using FASB Fiscal year;F;_F2;2
+F_F3;Finance;Private for-profit institutions Fiscal year;F;_F3;2
 GR;Graduation Rates;Graduation rate data, 150% of normal time to complete;GR;;4
 GR_L2;Graduation Rates;Graduation rate data, 150% of normal time to complete;GR;_L2;4
 GR200;Graduation Rates;Graduation rate data, 200% of normal time to complete;GR200_;;2

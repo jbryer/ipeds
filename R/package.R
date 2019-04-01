@@ -13,6 +13,7 @@ NA
 #' 
 #' @name surveys
 #' @docType data
+#' @format a data.frame with IPEDS survey IDs and titles.
 #' @references National Center for Educational Statistics. Integrated 
 #'      Postsecondary Education Data System \url{https://surveys.nces.ed.gov/ipeds/}
 #' @keywords data

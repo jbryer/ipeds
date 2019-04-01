@@ -7,6 +7,11 @@
 load_ipeds(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
   dir = paste0(system.file(package = "ipeds"), "/data/downloaded/"))
 }
+\arguments{
+\item{year}{the year of the survey}
+
+\item{dir}{the directory to download the data to. Defaults to the package directory.}
+}
 \value{
 a list with all tables (as data.frames) for the given year.
 }

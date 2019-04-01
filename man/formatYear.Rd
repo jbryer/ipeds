@@ -6,6 +6,11 @@
 \usage{
 formatYear(surveyId, year)
 }
+\arguments{
+\item{surveyId}{the survey ID from the data(surveys) data.frame.}
+
+\item{year}{the IPEDS release year.}
+}
 \description{
-Formats the year for a specific survey.
+Returns the formatted year for the given survey.
 }
