@@ -80,13 +80,13 @@ The `ipeds_help` function will return the data dictionary for the given year.
 If the `table` parameter is specified, then the data dictionary for the given survey is returned (i.e. the variables in that table, see `data(surveys)` for the available survey IDs).
 
 ```
-View(ipeds_help(2018, table = 'HD'))
+View(ipeds_help(table = 'HD', year = 2018))
 ```
 
 Finally, to load a specific table, the `ipeds_survey` function will return a `data.frame` with the data.
 
 ```
-> hd2018 <- ipeds_survey(2018, table = 'HD')
+> hd2018 <- ipeds_survey(table = 'HD', year = 2018)
 > names(hd2018)
  [1] "UNITID"   "INSTNM"   "IALIAS"   "ADDR"     "CITY"     "STABBR"   "ZIP"     
  [8] "FIPS"     "OBEREG"   "CHFNM"    "CHFTITLE" "GENTELE"  "EIN"      "DUNS"    
