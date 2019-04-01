@@ -11,8 +11,10 @@
 #'        finer control.
 #' @param ... other parmaters passed to \code{\link{read.csv}}
 #' @export
-getIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds"),
-						   stringsAsFactors=FALSE, ...) {
+getIPEDSSurvey <- function(surveyId, year, 
+						   dir = system.file(package="ipeds"),
+						   stringsAsFactors = FALSE, ...) {
+	warning("This function has been departed and will be removed in a future version. Use ipeds_survey instead.")
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(nrow(s) != 1) {
 		stop(paste('IPEDS survey with id', surveyId, 'not found'))

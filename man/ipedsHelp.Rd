@@ -12,5 +12,10 @@ ipedsHelp(surveyId, year)
 \item{year}{The year of the dictionary to display.}
 }
 \description{
-This function will open the dictionary for the given IPEDS survey and year. Note that the first time this function is invoked it will attempt to download the dictionary file from the IPEDS website.
+View the data dictionary for the given survey and year.
+}
+\details{
+This function will open the dictionary for the given IPEDS survey and year. 
+Note that the first time this function is invoked it will attempt to download 
+the dictionary file from the IPEDS website.
 }

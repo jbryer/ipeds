@@ -1,5 +1,7 @@
 #' This function generates a XML file for the twelve month enrollment survey.
 #'
+#' This function is no longer supported.
+#' 
 #' @title twelveMonthEnrollment
 #' @param data A data frame containing the required fields for IPEDS reporting.
 #' @param mappings The mapping between the fields in data and IPEDS (see \code{\link{mapIPEDSFields}} function)
@@ -14,12 +16,13 @@
 #' @param undergraduateContactHours The total number of undergraduate contact hours for the given reporting period.
 #' @param undergraduateCreditHours The total number of undergraduate credit hours for the given reporting period.
 #' @param graduateCreditHours The total number of graduate credit hours for the given reporting period.
-#' @export
 twelveMonthEnrollment <- function(data, mappings=NULL, institutionId=NA, 
 			institutionName=NA, documentId='a', createdDate=format(Sys.time(), '%Y-%m-%dT%H:%M:%S'), 
 			noteMessage=NA, transmissionType='Original', documentType='Application',
 			reportingPeriod='July-June', undergraduateContactHours=NULL,
 			undergraduateCreditHours=NULL, graduateCreditHours=NULL) {
+	warning('This function is no longer supported. Use at your own risk.')
+	
 	mappings$MappedColumn = as.character(mappings$MappedColumn)
 
 	if(is.na(institutionId)) { stop('institutionalId is required') }

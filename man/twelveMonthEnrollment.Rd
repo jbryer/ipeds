@@ -42,3 +42,6 @@ twelveMonthEnrollment(data, mappings = NULL, institutionId = NA,
 \description{
 This function generates a XML file for the twelve month enrollment survey.
 }
+\details{
+This function is no longer supported.
+}
