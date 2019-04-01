@@ -17,7 +17,7 @@ ipeds_survey <- function(table,
 	if(is.null(df)) {
 		year2 <- (year-1) %% 1000
 		year2 <- ifelse(year2 < 10, paste0('0', year2), as.character(year2))
-		data(surveys)
+		data('surveys', envir = environment())
 		survey.info <- surveys[surveys$SurveyID == table,]
 		if(nrow(survey.info) == 0) {
 			stop(paste0('Could not find ', table, ' in data(surveys). Specify the full table name with year.'))

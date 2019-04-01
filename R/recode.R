@@ -1,6 +1,7 @@
 #' recodeDirectory
 #'
 #' @title recodeDirectory
+#' @param hd data frame
 #' @export
 recodeDirectory <- function(hd) {
 	hd$control = recodeControl(hd$control)
@@ -21,6 +22,7 @@ recodeDirectory <- function(hd) {
 #' recodeImputation
 #'
 #' @title recodeImputation
+#' @param col the column name
 #' @export
 recodeImputation <- function(col) {
 	factor(col, levels=c('A','B','C','D','G','H','J','K','L','N','P','R','Z'),
@@ -42,6 +44,7 @@ recodeImputation <- function(col) {
 #' recodeControl
 #'
 #' @title recodeControl
+#' @param col the column name
 #' @export
 recodeGeographicRegion <- function(col) { #OBEREG
 	factor(col, levels=c(0,1,2,3,4,5,6,7,8,9),
@@ -60,6 +63,7 @@ recodeGeographicRegion <- function(col) { #OBEREG
 #' recodeControl
 #'
 #' @title recodeControl
+#' @param col the column name
 #' @export
 recodeControl <- function(col) { #CONTROL
 	factor(col, levels=c(1,2,3,-3),
@@ -72,6 +76,7 @@ recodeControl <- function(col) { #CONTROL
 #' recodeTitleIVEligibility
 #'
 #' @title recodeTitleIVEligibility
+#' @param col the column name
 #' @export
 recodeTitleIVEligibility <- function(col) { #OPEFLAG
 	factor(col, levels=c(1,2,3,8,5,6,7),
@@ -87,6 +92,7 @@ recodeTitleIVEligibility <- function(col) { #OPEFLAG
 #' recodeSector
 #'
 #' @title recodeSector
+#' @param col the column name
 #' @export
 recodeSector <- function(col) {  #SECTOR
 	factor(col, levels=c(0,1,2,3,4,5,6,7,8,9,99),
@@ -107,6 +113,7 @@ recodeSector <- function(col) {  #SECTOR
 #' recodeLevelOfInstitution
 #'
 #' @title recodeLevelOfInstitution
+#' @param col the column name
 #' @export
 recodeLevelOfInstitution <- function(col) { #ICLEVEL
 	factor(col, levels=c(1,2,3,-3),
@@ -119,6 +126,7 @@ recodeLevelOfInstitution <- function(col) { #ICLEVEL
 #' recodeHighestLevelOfOffering
 #'
 #' @title recodeHighestLevelOfOffering
+#' @param col the column name
 #' @export
 recodeHighestLevelOfOffering <- function(col) { #HLOFFER
 	factor(col, levels=c(1,2,3,4,5,6,7,8,9,-3),
@@ -137,6 +145,7 @@ recodeHighestLevelOfOffering <- function(col) { #HLOFFER
 #' recodeUndergraduateOffering
 #'
 #' @title recodeUndergraduateOffering
+#' @param col the column name
 #' @export
 recodeUndergraduateOffering <- function(col) { #UGOFFER
 	factor(col, levels=c(1,2,-3),
@@ -148,6 +157,7 @@ recodeUndergraduateOffering <- function(col) { #UGOFFER
 #' recodeGraduateOffering
 #'
 #' @title recodeGraduateOffering
+#' @param col the column name
 #' @export
 recodeGraduateOffering <- function(col) { #GROFFER
 	factor(col, levels=c(1,2,-3),
@@ -159,6 +169,7 @@ recodeGraduateOffering <- function(col) { #GROFFER
 #' recodeHighestDegreeOffered
 #'
 #' @title recodeHighestDegreeOffered
+#' @param col the column name
 #' @export
 recodeHighestDegreeOffered <- function(col) { #HDEGOFR
 	factor(col, levels=c(0,11,12,13,14,20,30,40,-3),
@@ -176,6 +187,7 @@ recodeHighestDegreeOffered <- function(col) { #HDEGOFR
 #' recodeOpenPublic
 #'
 #' @title recodeOpenPublic
+#' @param col the column name
 #' @export
 recodeOpenPublic <- function(col) { #OPENPUBL
 	factor(col, levels=c(1,0),
@@ -185,6 +197,7 @@ recodeOpenPublic <- function(col) { #OPENPUBL
 #' recodeTitleIVIndicator
 #'
 #' @title recodeTitleIVIndicator
+#' @param col the column name
 #' @export
 recodeTitleIVIndicator <- function(col) { #PSET4FLG
 	factor(col, levels=c(1,2,3,4,6,9),
@@ -199,6 +212,7 @@ recodeTitleIVIndicator <- function(col) { #PSET4FLG
 #' recodeInstitutionSize
 #'
 #' @title recodeInstitutionSize
+#' @param col the column name
 #' @export
 recodeInstitutionSize <- function(col) { #INSTSIZE
 	factor(col, levels=c(1,2,3,4,5,-1,-2),
@@ -214,6 +228,7 @@ recodeInstitutionSize <- function(col) { #INSTSIZE
 #' recodeAwardLevel
 #'
 #' @title recodeAwardLevel
+#' @param col the column name
 #' @export
 recodeAwardLevel <- function(col) {#AWLEVEL
 	factor(col, levels=c(3,5,7,9,10,17,18,19,1,2,4,6,8,11),

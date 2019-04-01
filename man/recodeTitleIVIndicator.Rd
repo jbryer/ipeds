@@ -6,6 +6,9 @@
 \usage{
 recodeTitleIVIndicator(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeTitleIVIndicator
 }

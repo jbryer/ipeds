@@ -6,6 +6,9 @@
 \usage{
 recodeAwardLevel(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeAwardLevel
 }

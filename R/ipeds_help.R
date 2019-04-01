@@ -19,7 +19,7 @@ ipeds_help <- function(table,
 		vartable <- db[[paste0('vartable', year2)]]
 		df <- vartable[vartable$TableName == table,] # if the user specifies the exact table name with year
 		if(nrow(df) == 0) {
-			data(surveys)
+			data('surveys', envir = environment())
 			survey.info <- surveys[surveys$SurveyID == table,]
 			if(nrow(survey.info) == 0) {
 				stop(paste0('Could not find ', table, ' in data(surveys). Specify the full table name with year.'))

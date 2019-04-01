@@ -11,6 +11,7 @@
 ipedsHelp <- function(surveyId, year) {
 	warning("This function has been departed and will be removed in a future version. Use ipeds_help instead.")
 	
+	data('surveys', envir = environment())
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(nrow(s) != 1) {
 		stop(paste('IPEDS survey with id', surveyId, 'not found'))

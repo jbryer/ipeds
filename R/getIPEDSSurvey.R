@@ -54,7 +54,7 @@ downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")
 
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	#dir = system.file(package="ipeds")
-	file = paste(s[1,'DataFilePre'], ipeds:::formatYear(surveyId, year), 
+	file = paste(s[1,'DataFilePre'], formatYear(surveyId, year), 
 				 s[1,'DataFilePost'], sep='')
 	url = paste(ipedsDataUrl, file, '.zip', sep='')
 	dir.create(paste(dir, '/data/downloaded/', sep=''), showWarnings=FALSE)
@@ -80,8 +80,9 @@ downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")
 #' @export
 downloadAllSurveys <- function(year, ...) {
 	warning("This function has been departed and will be removed in a future version. Use download_ipeds instead.")
-	
+	data('surveys', envir = environment())
 	for(i in 1:nrow(surveys)) {
-		tryCatch(downloadIPEDSSurvey(surveys[i,'SurveyID'], year, ...), error=function(e) { warning(paste("Error downloading survey:",surveys[i,'SurveyID'], surveys[i,'Title'])) })
+		tryCatch(downloadIPEDSSurvey(surveys[i,'SurveyID'], year, ...), error=function(e) { 
+			warning(paste("Error downloading survey:",surveys[i,'SurveyID'], surveys[i,'Title'])) })
 	}
 }

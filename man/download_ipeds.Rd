@@ -13,14 +13,14 @@ download_ipeds(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
 
 \item{dir}{the directory to download the data to. Defaults to the package directory.}
 
+\item{useProvisional}{if TRUE, provisional data files will be downloaded if 
+the final version is not available.}
+
 \item{force}{if TRUE, the function will redownload the file.}
 
 \item{cleanup}{if TRUE, the zip and MS Access files will be deleted after the Rda file is created.}
 
 \item{...}{currently unused.}
-
-\item{userProvisional}{if TRUE, provisional data files will be downloaded if 
-the final version is not available.}
 }
 \value{
 TRUE if the data has been successfully downloaded.

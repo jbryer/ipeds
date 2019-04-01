@@ -6,6 +6,9 @@
 \usage{
 recodeUndergraduateOffering(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeUndergraduateOffering
 }

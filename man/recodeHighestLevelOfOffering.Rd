@@ -6,6 +6,9 @@
 \usage{
 recodeHighestLevelOfOffering(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeHighestLevelOfOffering
 }

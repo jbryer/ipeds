@@ -6,6 +6,9 @@
 \usage{
 recodeDirectory(hd)
 }
+\arguments{
+\item{hd}{data frame}
+}
 \description{
 recodeDirectory
 }

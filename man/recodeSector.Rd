@@ -6,6 +6,9 @@
 \usage{
 recodeSector(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeSector
 }

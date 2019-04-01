@@ -6,6 +6,9 @@
 \usage{
 recodeControl(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeControl
 }

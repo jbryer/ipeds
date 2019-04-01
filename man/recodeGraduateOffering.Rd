@@ -6,6 +6,9 @@
 \usage{
 recodeGraduateOffering(col)
 }
+\arguments{
+\item{col}{the column name}
+}
 \description{
 recodeGraduateOffering
 }

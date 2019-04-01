@@ -7,7 +7,7 @@
 #' 
 #' @param year the year of the survey
 #' @param dir the directory to download the data to. Defaults to the package directory.
-#' @param userProvisional if TRUE, provisional data files will be downloaded if 
+#' @param useProvisional if TRUE, provisional data files will be downloaded if 
 #'        the final version is not available.
 #' @param force if TRUE, the function will redownload the file.
 #' @param cleanup if TRUE, the zip and MS Access files will be deleted after the Rda file is created.
