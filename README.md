@@ -8,7 +8,13 @@
 
 #### Installation
 
-Download the latest version from Github using the `devtools` package:
+The `ipeds` package can be downloaded from [CRAN](https://cran.r-project.org) as follows:
+
+```
+> install.packages('ipeds')
+```
+
+Or, you may wish to download the latest development version from Github using the `devtools` package:
 
 ```
 > devtools::install_github('jbryer/ipeds')
@@ -22,6 +28,12 @@ brew install mdbtools
 ```
 
 #### Using the `ipeds` package
+
+The vignette also has useful information for getting started:
+
+```
+vignette('ipeds')
+```
 
 The `available_ipeds` will return a `data.frame` indicating which databases are available for download and my have already been downloaded.
 

@@ -1,0 +1,11 @@
+Version 2.0.1
+==============
+
+* Replaced RCurl::url.exists with an internal function that should perform better on Windows systems.
+
+Version 2.0.0
+==============
+
+* First version for CRAN
+* This will not retrieve data from IPEDS using the MS Access data format.
+* Old functions will still function, but they will print warnings indicating that those functions have been deprectated and will be removed in a future version.

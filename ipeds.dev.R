@@ -2,6 +2,7 @@ library(devtools)
 
 document()
 install()
+install(build_vignettes = TRUE)
 build()
 check()
 

@@ -11,7 +11,7 @@
 #'        the final version is not available.
 #' @param force if TRUE, the function will redownload the file.
 #' @param cleanup if TRUE, the zip and MS Access files will be deleted after the Rda file is created.
-#' @param ... currently unused.
+#' @param ... other parameters passed to url_exists.
 #' @return TRUE if the data has been successfully downloaded.
 #' @export
 download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1, 
@@ -39,11 +39,11 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	
 	file <- paste0('IPEDS_', year.str, '_Final.zip')
 	url <- paste0(ipeds.base.url, file)
-	if(!url.exists(url)) {
+	if(!url_exists(url, ...)) {
 		message(paste0('Final data not available for ', year.str))
 		file <- paste0('IPEDS_', year.str, '_Provisional.zip')
 		url <- paste0(ipeds.base.url, file)
-		if(!url.exists(url)) {
+		if(!url_exists(url, ...)) {
 			stop(paste0(year.str, ' IPEDS database not available at: ', ipeds.download.page))
 		} else if(!useProvisional) {
 			stop(paste0('Final version of the ', year.str, 
