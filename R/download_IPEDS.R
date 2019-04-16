@@ -53,7 +53,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 		warning(paste0('Downloading the provisional database for ', year.str, '.'))
 	}
 	
-	dir.create(dir, showWarnings=FALSE)
+	dir.create(dir, showWarnings = FALSE, recursive = TRUE)
 	dest <- paste(dir, file, sep="")
 
 	if(!file.exists(dest) | force) {
@@ -62,7 +62,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 		message('Zip file already downloaded. Set force=TRUE to redownload.')
 	}
 
-	unzip(dest, exdir=dir)
+	unzip(dest, exdir = dir)
 	
 	accdb.file <- paste0(dir, 'IPEDS', (year - 1), (year %% 1000), '.accdb')
 	if(!file.exists(accdb.file)) {
