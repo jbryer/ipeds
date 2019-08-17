@@ -62,7 +62,17 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 		message('Zip file already downloaded. Set force=TRUE to redownload.')
 	}
 
+	# exdir cannot end with a / on windows
+	if(Sys.info()['sysname'] == 'Windows' &&  substr(dir,nchar(dir), nchar(dir)) == '/') {
+	  dir <- substr(dir, 1, nchar(dir)-1)
+	}
+	
 	unzip(dest, exdir = dir)
+	
+	# Put the / back, if we removed it
+	if(Sys.info()['sysname'] == 'Windows' &&  substr(dir,nchar(dir), nchar(dir)) != '/') {
+	  dir <- paste(dir,'/',sep='')
+	}
 	
 	accdb.file <- paste0(dir, 'IPEDS', (year - 1), (year %% 1000), '.accdb')
 	if(!file.exists(accdb.file)) {
