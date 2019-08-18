@@ -80,23 +80,30 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 					'Downloaded file: ', dest,
 					'File not found: ', accdb.file))
 	}
+	
+	if(Sys.info()['sysname'] == 'Windows') {
+	  db <- access_query_32(accdb.file)
+	  save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda')) 
+	}
+	else {
 
-	# Need to have mdtools installed. From the terminal (on Mac):	
-	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
-	# brew install mdbtools
-	tryCatch({
-		db <- Hmisc::mdb.get(accdb.file, stringsAsFactors = FALSE)
-		save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
-	}, error = function(e) {
-		print('Error loading the MS Access database file. Make sure mdtools is installed.')
-		if(Sys.info()['sysname'] == 'Darwin') {
-			print('The following terminal commands will install mdtools on Mac systems:')
-			cat('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')
-			cat('brew install mdbtools \n')
-		}
-		print('Original Error:')
-		print(e)
-	})
+  	# Need to have mdtools installed. From the terminal (on Mac):	
+  	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+  	# brew install mdbtools
+  	tryCatch({
+  		db <- Hmisc::mdb.get(accdb.file, stringsAsFactors = FALSE)
+  		save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
+  	}, error = function(e) {
+  		print('Error loading the MS Access database file. Make sure mdtools is installed.')
+  		if(Sys.info()['sysname'] == 'Darwin') {
+  			print('The following terminal commands will install mdtools on Mac systems:')
+  			cat('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')
+  			cat('brew install mdbtools \n')
+  		}
+  		print('Original Error:')
+  		print(e)
+  	})
+	}
 	
 	if(cleanup) {
 		unlink(dest)
