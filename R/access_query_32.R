@@ -7,7 +7,7 @@
 #' @return List of the tables that were extracted.
 #' @export
 #' 
-getTable <- function(theTable) {
+getTable <- function(theTable, ODBC_con, ODBC_str, sock_con, sock_port) {
   message(paste('Beginning table',theTable))
   expr <- "library(svSocket)"
   expr <- c(expr, "library(RODBC)")
@@ -53,7 +53,7 @@ access_query_32 <- function(db_path = "~/path/to/access.accdb") {
     expr <- "library(svSocket)"
     expr <- c(expr, "library(RODBC)")
     expr <- c(expr, sprintf("%s <- odbcDriverConnect('%s')", ODBC_con, ODBC_str))
-    expr <- c(expr, sprintf("theTables <- sqlTables(%2$s)", db_table, ODBC_con))
+    expr <- c(expr, sprintf("theTables <- sqlTables(%1$s)",  ODBC_con))
     expr <- c(expr, sprintf("%s <- socketConnection(port=%i)", sock_con, sock_port))
     expr <- c(expr, sprintf("evalServer(%s, %s, %s)", sock_con, 'theTables', 'theTables'))
     expr <- c(expr, "odbcCloseAll()")
@@ -67,7 +67,7 @@ access_query_32 <- function(db_path = "~/path/to/access.accdb") {
     
     # then iterate over the list of tables and pull them in one by one
     # but skip the metadata tables that start with "MSys"
-    lapply(theTables[which(substr(theTables$TABLE_NAME,1,4)!='MSys'),3], getTable)
+    lapply(theTables[which(substr(theTables$TABLE_NAME,1,4)!='MSys'),3], function(X) getTable(X, ODBC_con, ODBC_str, sock_con, sock_port))
     
     # stop socket server
     stopSocketServer(port=sock_port)
