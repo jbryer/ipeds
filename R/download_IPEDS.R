@@ -64,7 +64,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 
 	unzip(dest, exdir = dir)
 	
-	accdb.file <- paste0(dir, 'IPEDS', (year - 1), (year %% 1000), '.accdb')
+	accdb.file <- paste0(dir, 'IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
 	if(!file.exists(accdb.file)) {
 		stop(paste0('Problem loading MS Access database file.\n',
 					'Downloaded file: ', dest,
