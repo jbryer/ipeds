@@ -35,7 +35,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	}
 	
 	dir <- paste0(dir, '/')
-	year.str <- paste0((year - 1), '-', (year %% 1000))
+	year.str <- paste0((year - 1), '-', (sprintf("%02d",year %% 1000)))
 	
 	file <- paste0('IPEDS_', year.str, '_Final.zip')
 	url <- paste0(ipeds.base.url, file)
