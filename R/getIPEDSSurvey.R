@@ -18,7 +18,7 @@ getIPEDSSurvey <- function(surveyId, year,
 	
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(nrow(s) != 1) {
-		stop(paste('IPEDS survey with id', surveyId, 'not found'))
+		warning(paste('IPEDS survey with id', surveyId, 'not found'))
 	}
 	#dir = system.file(package="ipeds")
 	file = paste(s[1,'DataFilePre'], year, s[1,'DataFilePost'], sep='')
@@ -59,16 +59,22 @@ downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")
 	url = paste(ipedsDataUrl, file, '.zip', sep='')
 	dir.create(paste(dir, '/data/downloaded/', sep=''), showWarnings=FALSE)
 	dest = paste(dir, "/data/downloaded/", file, '.zip', sep="")
-	download.file(url, dest, mode="wb")
-	unzip(dest, exdir=paste(dir, "/data/downloaded", sep=""))
-	unlink(dest)
-	fname <- paste(dir, "/data/downloaded/", file, ".csv", sep="")
-	if(!file.exists(fname)) {
-		# Check to see if the filename is in lowercase
-		fname <- paste(dir, "/data/downloaded/", tolower(file), ".csv", sep="")
-	}
-	r = read.csv(fname, stringsAsFactors=stringsAsFactors, ...)
-	return(r)
+	tryCatch({
+	  download.file(url, dest, mode="wb")
+    unzip(dest, exdir=paste(dir, "/data/downloaded", sep=""))
+    unlink(dest)
+    fname <- paste(dir, "/data/downloaded/", file, ".csv", sep="")
+    if(!file.exists(fname)) {
+      # Check to see if the filename is in lowercase
+      fname <- paste(dir, "/data/downloaded/", tolower(file), ".csv", sep="")
+    }
+    r = read.csv(fname, stringsAsFactors=stringsAsFactors, ...)
+    return(r)               
+   } , error=function(e) {
+     simpleError('Error downloading file')
+      return(NULL)
+	})
+	
 }
 
 

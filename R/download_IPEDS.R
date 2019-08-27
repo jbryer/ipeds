@@ -82,8 +82,8 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	}
 	
 	if(Sys.info()['sysname'] == 'Windows') {
-	  db <- access_query_32(accdb.file)
-	  save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda')) 
+	#  db <- access_query_32(accdb.file)
+	#  save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda')) 
 	}
 	else {
 

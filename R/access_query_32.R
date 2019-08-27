@@ -67,7 +67,7 @@ access_query_32 <- function(db_path = "~/path/to/access.accdb") {
     
     # then iterate over the list of tables and pull them in one by one
     # but skip the metadata tables that start with "MSys"
-    lapply(theTables[which(substr(theTables$TABLE_NAME,1,4)!='MSys'),3], function(X) getTable(X, ODBC_con, ODBC_str, sock_con, sock_port))
+    lapply(theTables[which(substr(theTables$TABLE_NAME,1,4)!='MSys' & substr(theTables$TABLE_NAME,1,1)!='C'),3], function(X) getTable(X, ODBC_con, ODBC_str, sock_con, sock_port))
     
     # stop socket server
     stopSocketServer(port=sock_port)

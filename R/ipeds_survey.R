@@ -14,7 +14,7 @@ ipeds_survey <- function(table,
 						 dir = getOption('ipeds.download.dir')) {
 	db <- load_ipeds(year = year, dir = dir)
 	df <- db[[table]]
-	if(is.null(df)) {
+if(is.null(df)) {
 		year2 <- (year-1) %% 1000
 		year2 <- ifelse(year2 < 10, paste0('0', year2), as.character(year2))
 		data('surveys', envir = environment())
