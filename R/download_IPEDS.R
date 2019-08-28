@@ -45,8 +45,8 @@ download_ipeds <-
         tryCatch(
           do.call('<-', list((
             paste(as.character(surveys[i, 'SurveyID']), year, sep = '')
-          ), getIPEDSSurvey((surveys[i, 'SurveyID']), year
-          ))),
+          ), suppressWarnings(getIPEDSSurvey((surveys[i, 'SurveyID']), year)))
+          ),
           error = function(e) {
             simpleError(paste("Error downloading survey:", surveys[i, 'SurveyID'], surveys[i, 'Title']))
           }
