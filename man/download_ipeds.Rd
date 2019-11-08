@@ -5,8 +5,8 @@
 \title{Downloads IPEDS data for a given year.}
 \usage{
 download_ipeds(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = paste0(system.file(package = "ipeds"), "/data/downloaded"),
-  useProvisional = TRUE, force = FALSE, cleanup = FALSE, ...)
+  dir = getOption("ipeds.download.dir"), useProvisional = TRUE,
+  force = FALSE, cleanup = FALSE, ...)
 }
 \arguments{
 \item{year}{the year of the survey}
@@ -20,7 +20,7 @@ the final version is not available.}
 
 \item{cleanup}{if TRUE, the zip and MS Access files will be deleted after the Rda file is created.}
 
-\item{...}{currently unused.}
+\item{...}{other parameters passed to url_exists.}
 }
 \value{
 TRUE if the data has been successfully downloaded.

@@ -15,7 +15,7 @@
 #' @return TRUE if the data has been successfully downloaded.
 #' @export
 download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1, 
-						   dir = paste0(system.file(package="ipeds"), '/data/downloaded'), 
+						   dir = getOption('ipeds.download.dir'), 
 						   useProvisional = TRUE,
 						   force = FALSE,
 						   cleanup = FALSE,

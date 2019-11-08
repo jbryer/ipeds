@@ -58,11 +58,13 @@ utils::globalVariables(c('surveys', 'db'))
 .onLoad <- function(libname, pkgname) {
 	ethnicityLevels <<- c('HispanicAnyRace', 'AmericanIndianOrAlaskaNative', 'Asian', 
 						  'BlackOrAfricanAmerican', 'NativeHawaiianOrPacificIslander', 
-						  'White', 'TwoOrMoreRaces', 'NonresidentAlien', 'RaceEthnicityUnknown')
+						  'White', 'TwoOrMoreRaces', 'NonresidentAlien', 
+						  'RaceEthnicityUnknown')
 	genderLevels <<- c('Male', 'Female')
 	if(is.null(getOption('ipeds.download.dir'))) {
 		dir <- paste0(system.file(package="ipeds"), '/data/downloaded/')
-		# message(paste0('IPEDS data files will be downloaded to ', dir))
+		packageStartupMessage(paste0('IPEDS data files will be downloaded to ', dir,
+			'\nUse options("ipeds.download.dir" = "/PATH/TO/DOWNLOAD") to override this.'))
 		options('ipeds.download.dir' = dir)
 	}
 }

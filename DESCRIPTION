@@ -1,8 +1,8 @@
 Package: ipeds
 Type: Package
 Title: Integrated Postsecondary Education Data System (IPEDS) Access
-Version: 2.0.1
-Date: 2019-04-10
+Version: 2.0.2
+Date: 2019-11-077
 Author: Jason Bryer <jason@bryer.org>
 Maintainer: Jason Bryer <jason@bryer.org>
 URL: https://github.com/jbryer/ipeds

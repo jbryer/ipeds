@@ -4,7 +4,7 @@
 \alias{url_exists}
 \title{Returns whether the given URL is valid.}
 \usage{
-url_exists(x, non_2xx_return_value = FALSE, quiet = FALSE, ...)
+url_exists(x, non_2xx_return_value = FALSE, quiet = TRUE, ...)
 }
 \arguments{
 \item{x}{a single URL}

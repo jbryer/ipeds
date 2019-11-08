@@ -86,3 +86,16 @@ if(any(missing.tables$SurveyID %in% surveys$SurveyID)) {
 	surveys <- rbind(surveys, missing.tables)
 	save(surveys, file = 'data/surveys.rda')
 }
+
+################################################################################
+# Test an alternative way of reading aacdb files on Windows
+# NOTE: Currently does not work
+
+Sys.info()['sysname'] == 'Windows' # Check for Windows
+Sys.info()['machine']  # Probably needs to be 32-bit
+library(RODBC)
+db <- file.path(file.choose())
+channel <- RODBC::odbcConnectAccess2007(db)
+subset(sqlTables(conn), TABLE_TYPE == "TABLE")
+sqlTables(channels)
+

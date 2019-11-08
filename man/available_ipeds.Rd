@@ -4,10 +4,12 @@
 \alias{available_ipeds}
 \title{Available IPEDS databases}
 \usage{
-available_ipeds(dir = getOption("ipeds.download.dir"))
+available_ipeds(dir = getOption("ipeds.download.dir"), ...)
 }
 \arguments{
 \item{dir}{directory where IPEDS databases are to be downloaded.}
+
+\item{...}{other parameters passed to url_exists.}
 }
 \value{
 a data.frame with final and provisional columns indicating whether
