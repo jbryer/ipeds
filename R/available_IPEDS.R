@@ -9,7 +9,7 @@
 #'         those databases are available for download. The downloaded column 
 #'         indicates whether that database has already been downloaded.
 #' @export
-available_ipeds <- function(dir = getOption('ipeds.download.dir'),
+available_ipeds <- function(dir = getIPEDSDownloadDirectory(),
 							...) {
 	firstYear <- 2007
 	results <- data.frame(year = firstYear:as.integer(format(Sys.Date(), '%Y')),

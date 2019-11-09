@@ -7,7 +7,7 @@
 #' @return a list with all tables (as data.frames) for the given year.
 #' @export
 load_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
-					   dir = getOption('ipeds.download.dir')) {
+					   dir = getIPEDSDownloadDirectory()) {
 	year.str <- getYearString(year)
 	file <- paste0(dir, '/IPEDS', year.str, '.Rda')
 	if(!file.exists(file)) {

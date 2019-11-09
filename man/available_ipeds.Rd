@@ -4,7 +4,7 @@
 \alias{available_ipeds}
 \title{Available IPEDS databases}
 \usage{
-available_ipeds(dir = getOption("ipeds.download.dir"), ...)
+available_ipeds(dir = getIPEDSDownloadDirectory(), ...)
 }
 \arguments{
 \item{dir}{directory where IPEDS databases are to be downloaded.}

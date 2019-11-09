@@ -5,7 +5,7 @@
 \title{Returns data.frame with the data dictionary.}
 \usage{
 ipeds_help(table, year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = getOption("ipeds.download.dir"))
+  dir = getIPEDSDownloadDirectory())
 }
 \arguments{
 \item{table}{if specified, the variable information for the given survey result table is returned.}

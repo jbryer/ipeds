@@ -10,13 +10,16 @@ library(ipeds)
 ls('package:ipeds')
 data(package = 'ipeds')
 
+devtools::install_github('jbryer/ipeds', build_vignettes = TRUE)
+vignette('ipeds')
+
 # This is where the data files will be downloaded by default
 (ipeds.dir.sys <- paste0(system.file(package="ipeds"), '/data/downloaded/'))
 # For development purposes, we will save IPEDS data files here (to save across installs)
 (ipeds.dir <- 'data-raw')
 
 options('ipeds.download.dir' = ipeds.dir)
-getOption('ipeds.download.dir')
+getIPEDSDownloadDirectory()
 
 # This will copy pre-processed data files in the data-raw to the system location.
 # This is convenient for testing purposes since each install will delete the data

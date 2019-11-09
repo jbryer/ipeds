@@ -5,7 +5,7 @@
 \title{IPEDS Survey Table}
 \usage{
 ipeds_survey(table, year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = getOption("ipeds.download.dir"))
+  dir = getIPEDSDownloadDirectory())
 }
 \arguments{
 \item{table}{the IPEDS survey result to return.}

@@ -5,7 +5,7 @@
 \title{Downloads IPEDS data for a given year.}
 \usage{
 download_ipeds(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = getOption("ipeds.download.dir"), useProvisional = TRUE,
+  dir = getIPEDSDownloadDirectory(), useProvisional = TRUE,
   force = FALSE, cleanup = FALSE, ...)
 }
 \arguments{

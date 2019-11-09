@@ -55,16 +55,30 @@ ipedsDataUrl <- 'http://nces.ed.gov/ipeds/datacenter/data/'
 
 utils::globalVariables(c('surveys', 'db'))
 
+#' Private function that returns the location to download IPEDS data files.
+#' 
+#' This will check to see if the ipeds.download.dir option has been set, if it
+#' has that will be returned, if not it will set the option to the current
+#' the data/downloaded/ directory of the current working directory, i.e.:
+#' paste0(system.file(package="ipeds"), '/data/downloaded/')
+#' 
+#' @return directory to download IPEDS data.
+#' @export
+getIPEDSDownloadDirectory <- function() {
+	dir <- getOption('ipeds.download.dir')
+	if(is.null(dir)) {
+		dir <- paste0(getwd(), '/data/downloaded/')
+		packageStartupMessage(paste0('IPEDS data files will be downloaded to ', dir,
+									 '\nUse options("ipeds.download.dir" = "/PATH/TO/DOWNLOAD") to override this.'))
+		options('ipeds.download.dir' = dir)
+	}
+	return(dir)
+}
+
 .onLoad <- function(libname, pkgname) {
 	ethnicityLevels <<- c('HispanicAnyRace', 'AmericanIndianOrAlaskaNative', 'Asian', 
 						  'BlackOrAfricanAmerican', 'NativeHawaiianOrPacificIslander', 
 						  'White', 'TwoOrMoreRaces', 'NonresidentAlien', 
 						  'RaceEthnicityUnknown')
 	genderLevels <<- c('Male', 'Female')
-	if(is.null(getOption('ipeds.download.dir'))) {
-		dir <- paste0(system.file(package="ipeds"), '/data/downloaded/')
-		packageStartupMessage(paste0('IPEDS data files will be downloaded to ', dir,
-			'\nUse options("ipeds.download.dir" = "/PATH/TO/DOWNLOAD") to override this.'))
-		options('ipeds.download.dir' = dir)
-	}
 }

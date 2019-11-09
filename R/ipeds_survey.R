@@ -11,7 +11,7 @@
 #' @export
 ipeds_survey <- function(table,
 						 year = as.integer(format(Sys.Date(), '%Y')) - 1,
-						 dir = getOption('ipeds.download.dir')) {
+						 dir = getIPEDSDownloadDirectory()) {
 	db <- load_ipeds(year = year, dir = dir)
 	df <- db[[table]]
 	if(is.null(df)) {

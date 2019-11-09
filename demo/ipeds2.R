@@ -1,12 +1,15 @@
 # This demonstrates version 2 of the package.
 
-dir <- paste0(getwd(), '/data-raw/downloaded/')
-options('ipeds.download.dir' = dir)
-
 library(ipeds)
 
 # Where the package will download data files.
-getOption('ipeds.download.dir')
+getIPEDSDownloadDirectory()
+
+# We can override the download directory
+dir <- paste0(getwd(), '/data-raw/downloaded/')
+options('ipeds.download.dir' = dir)
+getIPEDSDownloadDirectory()
+
 
 # data.frame of available IPEDS surveyss
 ipeds::available_ipeds()
