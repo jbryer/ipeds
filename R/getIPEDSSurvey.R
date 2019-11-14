@@ -50,7 +50,7 @@ getIPEDSSurvey <- function(surveyId, year,
 #' @export
 downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds"),
 								stringsAsFactors=FALSE, ...) {
-	warning("This function has been departed and will be removed in a future version. Use download_ipeds instead.")
+	warning("This function has been deprecated and will be removed in a future version. Use download_ipeds instead.")
 
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	#dir = system.file(package="ipeds")
@@ -79,7 +79,7 @@ downloadIPEDSSurvey <- function(surveyId, year, dir=system.file(package="ipeds")
 #' @param ... other parameters passed to \code{\link{downloadIPEDSSurvey}}
 #' @export
 downloadAllSurveys <- function(year, ...) {
-	warning("This function has been departed and will be removed in a future version. Use download_ipeds instead.")
+	warning("This function has been deprecated and will be removed in a future version. Use download_ipeds instead.")
 	data('surveys', envir = environment())
 	for(i in 1:nrow(surveys)) {
 		tryCatch(downloadIPEDSSurvey(surveys[i,'SurveyID'], year, ...), error=function(e) { 
