@@ -14,7 +14,7 @@
 getIPEDSSurvey <- function(surveyId, year, 
 						   dir = system.file(package="ipeds"),
 						   stringsAsFactors = FALSE, ...) {
-	warning("This function has been departed and will be removed in a future version. Use ipeds_survey instead.")
+	warning("This function has been deprecated and will be removed in a future version. Use ipeds_survey instead.")
 	
 	s = surveys[which(surveys$SurveyID==surveyId),]
 	if(nrow(s) != 1) {
