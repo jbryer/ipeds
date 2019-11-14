@@ -9,7 +9,7 @@
 #' @param year The year of the dictionary to display.
 #' @export
 ipedsHelp <- function(surveyId, year) {
-	warning("This function has been departed and will be removed in a future version. Use ipeds_help instead.")
+	warning("This function has been deprecated and will be removed in a future version. Use ipeds_help instead.")
 	
 	data('surveys', envir = environment())
 	s = surveys[which(surveys$SurveyID==surveyId),]
