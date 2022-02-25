@@ -55,7 +55,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	
 	dir.create(dir, showWarnings = FALSE, recursive = TRUE)
 	dest <- paste(dir, file, sep="")
-
+	options(timeout=240) # nces.ed.gov is too slow and the zip file does not finish downloading in 60 seconds.
 	if(!file.exists(dest) | force) {
 		download.file(url, dest, mode="wb")
 	} else {
