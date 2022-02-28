@@ -95,7 +95,7 @@ If the `table` parameter is specified, then the data dictionary for the given su
 View(ipeds_help(table = 'HD', year = 2018))
 ```
 
-Finally, to load a specific table, the `ipeds_survey` function will return a `data.frame` with the data.
+To load a specific table, the `ipeds_survey` function will return a `data.frame` with the data.
 
 ```
 > hd2018 <- ipeds_survey(table = 'HD', year = 2018)
@@ -112,4 +112,64 @@ Finally, to load a specific table, the `ipeds_survey` function will return a `da
 [64] "CSA"      "NECTA"    "COUNTYCD" "COUNTYNM" "CNGDSTCD" "LONGITUD" "LATITUDE"
 [71] "DFRCGID"  "DFRCUSCG"
 ```
+
+Mapping variable factors.
+```
+> names(hd2018) = tolower(names(hd2018))
+> hd2018 = recodeDirectory(hd2018)
+
+> IvyLeague <- c("186131","190150","166027","130794","215062","182670","217156","190415")
+> hd2018.ivy <- hd2018[which(hd2018$unitid %in%IvyLeague),]
+> hd2018.ivy[, c("instnm", "webaddr", "stabbr", "control")]
+> names(p) = c("Institution", "Web Address", "State", "Sector")
+> p
+                                          instnm           webaddr stabbr                control
+674                              Yale University      www.yale.edu     CT Private not-for-profit
+1633                          Harvard University   www.harvard.edu     MA Private not-for-profit
+2127                           Dartmouth College www.dartmouth.edu     NH Private not-for-profit
+2221                        Princeton University www.princeton.edu     NJ Private not-for-profit
+2334 Columbia University in the City of New York  www.columbia.edu     NY Private not-for-profit
+2342                          Cornell University   www.cornell.edu     NY Private not-for-profit
+3231                  University of Pennsylvania     www.upenn.edu     PA Private not-for-profit
+3313                            Brown University     www.brown.edu     RI Private not-for-profit
+```
+
+Use the enrollment survey data.
+```
+> enrollment <- ipeds_survey(table = 'EFFY', year = 2018)
+> names(enrollment) = tolower(names(enrollment))
+
+> enrollment <- enrollment[which(enrollment$unitid %in% c(IvyLeague,PublicIvy) ),]
+> enrollment <- merge(enrollment, hd2018[, c("unitid", "instnm", "control")], by = "unitid", all.x = TRUE, sort = FALSE)
+> enrollment = enrollment[which(enrollment[,"effylev"] == 1),] # Level 1 is Undergraduate
+
+> p <- enrollment[, c("instnm", "efytotlt", "control")]
+> names(p) = c("Institution", "Total Undergraduate Enrollment", "Sector")
+> p
+                                   Institution Total Undergraduate Enrollment                 Sector
+1            University of California-Berkeley                          42684                 Public
+4               University of California-Davis                          38778                 Public
+8              University of California-Irvine                          34754                 Public
+11        University of California-Los Angeles                          46298                 Public
+14          University of California-Riverside                          24371                 Public
+16          University of California-San Diego                          36785                 Public
+19      University of California-Santa Barbara                          25833                 Public
+24         University of California-Santa Cruz                          19912                 Public
+26                             Yale University                          13613 Private not-for-profit
+28                          Harvard University                          39407 Private not-for-profit
+32            University of Michigan-Ann Arbor                          46316                 Public
+36                           Dartmouth College                           6920 Private not-for-profit
+39                        Princeton University                           8483 Private not-for-profit
+40 Columbia University in the City of New York                          31664 Private not-for-profit
+43                          Cornell University                          22820 Private not-for-profit
+47 University of North Carolina at Chapel Hill                          31720                 Public
+50                     Miami University-Oxford                          21717                 Public
+53                  University of Pennsylvania                          28522 Private not-for-profit
+55                            Brown University                          10335 Private not-for-profit
+58           The University of Texas at Austin                          55008                 Public
+63                       University of Vermont                          15524                 Public
+65                 College of William and Mary                           9767                 Public
+67          University of Virginia-Main Campus                          27960                 Public
+```
+
 
