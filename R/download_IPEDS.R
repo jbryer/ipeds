@@ -82,6 +82,11 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 	# brew install mdbtools
 	tryCatch({
+		# Characters in the file path that should be escaped before calling mdbtools
+		escape_characters <- c(' ', '(', ')')
+		for(i in escape_characters) {
+			accdb.file <- gsub(i, paste0('\\', i), accdb.file, fixed = TRUE)
+		}
 		db <- Hmisc::mdb.get(accdb.file, stringsAsFactors = FALSE)
 		save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
 	}, error = function(e) {
