@@ -6,7 +6,9 @@
 \title{Crosswalk of 2000 CIP codes to 2010 CIP codes
  
 Maps the 2000 CIP codes with the 2010 CIP codes.}
-\format{a data.frame with 2,202 observations of 6 variables.}
+\format{
+a data.frame with 2,202 observations of 6 variables.
+}
 \description{
 Crosswalk of 2000 CIP codes to 2010 CIP codes
  

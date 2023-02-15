@@ -18,6 +18,6 @@ Description: The Integrated Postsecondary Education Data
     downloading and loading of data and data dictionaries from the IPEDS website.
 License: GPL
 LazyLoad: yes
-RoxygenNote: 6.1.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 VignetteBuilder: knitr 

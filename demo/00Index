@@ -2,3 +2,4 @@ SATretention 	Explores the relationship between SAT scores and first year retent
 Gender 	Examines the number of graduates by gender in math, statistics, and CIS from 2000 to 2002.
 Retention 	Example getting and using retention data.
 SATretention 	Explores the relationship between SAT scores and first year retention.
+ipeds2 	Example using the newever data format of getting IPEDS data.

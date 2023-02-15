@@ -4,8 +4,13 @@
 \alias{getIPEDSSurvey}
 \title{getIPEDSSurvey}
 \usage{
-getIPEDSSurvey(surveyId, year, dir = system.file(package = "ipeds"),
-  stringsAsFactors = FALSE, ...)
+getIPEDSSurvey(
+  surveyId,
+  year,
+  dir = system.file(package = "ipeds"),
+  stringsAsFactors = FALSE,
+  ...
+)
 }
 \arguments{
 \item{surveyId}{The survey ID of the dictionary to display (i.e. surveys$SurveyID)}

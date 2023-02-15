@@ -4,7 +4,9 @@
 \name{cipcodes}
 \alias{cipcodes}
 \title{Classification of Instructional Programs (CIP) Codes}
-\format{a data.frame with 2,318 observations of 8 variables.}
+\format{
+a data.frame with 2,318 observations of 8 variables.
+}
 \description{
 The Classification of Instructional Programs (CIP) provides a taxonomic 
 scheme that supports the accurate tracking and reporting of fields of study 

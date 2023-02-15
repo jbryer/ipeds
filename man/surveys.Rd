@@ -4,7 +4,9 @@
 \name{surveys}
 \alias{surveys}
 \title{List of available surveys to load from IPEDS}
-\format{a data.frame with IPEDS survey IDs and titles.}
+\format{
+a data.frame with IPEDS survey IDs and titles.
+}
 \description{
 List of available surveys to load from IPEDS
 }

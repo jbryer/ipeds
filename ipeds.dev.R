@@ -1,10 +1,8 @@
-library(devtools)
-
-document()
-install()
-install(build_vignettes = TRUE)
-build()
-check()
+devtools::document()
+devtools::install()
+devtools::install(build_vignettes = TRUE)
+devtools::build()
+devtools::check()
 
 library(ipeds)
 ls('package:ipeds')
@@ -19,7 +17,7 @@ vignette('ipeds')
 (ipeds.dir <- 'data-raw')
 
 options('ipeds.download.dir' = ipeds.dir)
-getIPEDSDownloadDirectory()
+ipeds::getIPEDSDownloadDirectory()
 
 # This will copy pre-processed data files in the data-raw to the system location.
 # This is convenient for testing purposes since each install will delete the data
@@ -30,15 +28,14 @@ getIPEDSDownloadDirectory()
 # 		  to = paste0(ipeds.dir.sys, '/', ipeds.files))
 
 # What IPEDS databases are available?
-available_ipeds()
+ipeds::available_ipeds()
 
 # Download IPEDS data files
-download_ipeds(year = 2018:2017) # May want to copy to system folder (see above)
-# download_ipeds(year = 2016:2007)
+ipeds::download_ipeds(year = 2021) # May want to copy to system folder (see above)
 tools::resaveRdaFiles(ipeds.dir) # Compress the data files further
 
 # Get all the tables for a given year
-ipeds <- load_ipeds(year = 2018)
+ipeds <- ipeds::load_ipeds(year = 2021)
 names(ipeds)
 
 # Data dictionaries
@@ -46,7 +43,7 @@ View(ipeds_help(2018))
 View(ipeds_help(2018, table = 'HD'))
 
 # Get the directory table.
-ipeds.directory <- ipeds_survey(2018, table = 'HD') # Directory table
+ipeds.directory <- ipeds::ipeds_survey(2018, table = 'HD') # Directory table
 dim(ipeds.directory)
 
 # This is the list of available survey tables. This may not be exhaustive.

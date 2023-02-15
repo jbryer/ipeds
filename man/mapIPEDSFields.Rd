@@ -4,9 +4,14 @@
 \alias{mapIPEDSFields}
 \title{mapIPEDSFields}
 \usage{
-mapIPEDSFields(programCIPCode, educationalProgramType,
-  educationalProgramName, educationalAwardLevel, ethnicityColumn,
-  genderColumn)
+mapIPEDSFields(
+  programCIPCode,
+  educationalProgramType,
+  educationalProgramName,
+  educationalAwardLevel,
+  ethnicityColumn,
+  genderColumn
+)
 }
 \arguments{
 \item{programCIPCode}{The name of the column containing the CIP codes.}

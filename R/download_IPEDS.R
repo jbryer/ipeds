@@ -11,6 +11,7 @@
 #'        the final version is not available.
 #' @param force if TRUE, the function will redownload the file.
 #' @param cleanup if TRUE, the zip and MS Access files will be deleted after the Rda file is created.
+#' @param timeout the amount of time, in milliseconds, to allow a file to download.
 #' @param ... other parameters passed to url_exists.
 #' @return TRUE if the data has been successfully downloaded.
 #' @export
@@ -19,17 +20,18 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 						   useProvisional = TRUE,
 						   force = FALSE,
 						   cleanup = FALSE,
+						   timeout = 300,
 						   ...) {
 	if(length(year) > 1) {
 		status <- TRUE
 		for(i in year) {
 			status <- status &
 				download_ipeds(year = i,
-						   dir = dir,
-						   userProvisional = useProvisional,
-						   force = force,
-						   cleanup = cleanup,
-						   ...)
+							   dir = dir,
+							   userProvisional = useProvisional,
+							   force = force,
+							   cleanup = cleanup,
+							   ...)
 		}
 		invisible(status)
 	}
@@ -55,22 +57,27 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	
 	dir.create(dir, showWarnings = FALSE, recursive = TRUE)
 	dest <- paste(dir, file, sep="")
-	options(timeout=240) # nces.ed.gov is too slow and the zip file does not finish downloading in 60 seconds.
+	
 	if(!file.exists(dest) | force) {
+		options(timeout = max(timeout, getOption("timeout")))
 		download.file(url, dest, mode="wb")
 	} else {
 		message('Zip file already downloaded. Set force=TRUE to redownload.')
 	}
-
+	
 	unzip(dest, exdir = dir)
 	
 	accdb.file <- paste0(dir, 'IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
 	if(!file.exists(accdb.file)) {
-		stop(paste0('Problem loading MS Access database file.\n',
-					'Downloaded file: ', dest,
-					'File not found: ', accdb.file))
+		# Check to see if it is a sub directory of the ZIP file.
+		accdb.file <- paste0(tools::file_path_sans_ext(dest), '/IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
+		if(!file.exists(accdb.file)) {
+			stop(paste0('Problem loading MS Access database file.\n',
+						'Downloaded file: ', dest, '\n',
+						'File not found: ', accdb.file))
+		}
 	}
-
+	
 	# Need to have mdtools installed. From the terminal (on Mac):	
 	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
 	# brew install mdbtools

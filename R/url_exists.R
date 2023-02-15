@@ -11,6 +11,7 @@
 #' @param ... other params (`timeout()` would be a good one) passed directly
 #'        to `httr::HEAD()` and/or `httr::GET()`
 #' @author hrbrmstr
+#' @importFrom httr status_code
 url_exists <- function(x, non_2xx_return_value = FALSE, quiet = TRUE,...) {
 	# you don't need thse two functions if you're alread using `purrr`
 	# but `purrr` is a heavyweight compiled pacakge that introduces

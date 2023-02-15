@@ -4,8 +4,11 @@
 \alias{ipeds_survey}
 \title{IPEDS Survey Table}
 \usage{
-ipeds_survey(table, year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = getIPEDSDownloadDirectory())
+ipeds_survey(
+  table,
+  year = as.integer(format(Sys.Date(), "\%Y")) - 1,
+  dir = getIPEDSDownloadDirectory()
+)
 }
 \arguments{
 \item{table}{the IPEDS survey result to return.}

@@ -4,9 +4,15 @@
 \alias{download_ipeds}
 \title{Downloads IPEDS data for a given year.}
 \usage{
-download_ipeds(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = getIPEDSDownloadDirectory(), useProvisional = TRUE,
-  force = FALSE, cleanup = FALSE, ...)
+download_ipeds(
+  year = as.integer(format(Sys.Date(), "\%Y")) - 1,
+  dir = getIPEDSDownloadDirectory(),
+  useProvisional = TRUE,
+  force = FALSE,
+  cleanup = FALSE,
+  timeout = 300,
+  ...
+)
 }
 \arguments{
 \item{year}{the year of the survey}
@@ -19,6 +25,8 @@ the final version is not available.}
 \item{force}{if TRUE, the function will redownload the file.}
 
 \item{cleanup}{if TRUE, the zip and MS Access files will be deleted after the Rda file is created.}
+
+\item{timeout}{the amount of time, in milliseconds, to allow a file to download.}
 
 \item{...}{other parameters passed to url_exists.}
 }

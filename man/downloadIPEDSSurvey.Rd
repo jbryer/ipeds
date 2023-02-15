@@ -4,8 +4,13 @@
 \alias{downloadIPEDSSurvey}
 \title{downloadIPEDSSurvey}
 \usage{
-downloadIPEDSSurvey(surveyId, year, dir = system.file(package = "ipeds"),
-  stringsAsFactors = FALSE, ...)
+downloadIPEDSSurvey(
+  surveyId,
+  year,
+  dir = system.file(package = "ipeds"),
+  stringsAsFactors = FALSE,
+  ...
+)
 }
 \arguments{
 \item{surveyId}{the survey ID from the surveys data frame}

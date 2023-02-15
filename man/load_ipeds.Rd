@@ -4,8 +4,10 @@
 \alias{load_ipeds}
 \title{Loads IPEDS data for a given year.}
 \usage{
-load_ipeds(year = as.integer(format(Sys.Date(), "\%Y")) - 1,
-  dir = getIPEDSDownloadDirectory())
+load_ipeds(
+  year = as.integer(format(Sys.Date(), "\%Y")) - 1,
+  dir = getIPEDSDownloadDirectory()
+)
 }
 \arguments{
 \item{year}{the year of the survey}
