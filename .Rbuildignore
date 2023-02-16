@@ -5,3 +5,4 @@ archive
 ipeds.dev.R
 cran-comments.md
 ^CRAN-RELEASE$
+data/downloaded/

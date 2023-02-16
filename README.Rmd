@@ -1,0 +1,111 @@
+---
+title: "`ipeds`: R Package for Accessing the Integrated Postsecondary Education Data System from R"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+<!-- 
+[![Build Status](https://api.travis-ci.org/jbryer/ipeds.svg)](https://travis-ci.org/jbryer/ipeds?branch=master)
+[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/ipeds)](http://cran.r-project.org/package=ipeds)
+![Downloads](http://cranlogs.r-pkg.org/badges/ipeds)
+-->
+
+#### Installation
+
+<!--
+The `ipeds` package can be downloaded from [CRAN](https://cran.r-project.org) as follows:
+
+```{r, eval = FALSE}
+install.packages('ipeds')
+```
+-->
+
+To install the latest development version from Github use the `remotes`` package:
+
+```{r, eval = FALSE}
+remotes::install_github('jbryer/ipeds')
+```
+
+This package requires [mdbtools](https://github.com/brianb/mdbtools). The following commands will install `mdbtools` on Mac:
+
+```
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')
+brew install mdbtools
+```
+
+#### Using the `ipeds` package
+
+The vignette also has useful information for getting started:
+
+```{r, eval = FALSE}
+vignette('ipeds')
+```
+
+The `available_ipeds` will return a `data.frame` indicating which databases are available for download and my have already been downloaded.
+
+```{r}
+ipeds::available_ipeds()
+```
+
+The `download_ipeds` will download an IPEDS database for a given year.
+
+```{r}
+ipeds::download_ipeds(2021)
+```
+
+The `load_ipeds` will return a list of all the survey tables (as `data.frame`s) for the given year.
+
+```{r}
+ipeds2021 <- ipeds::load_ipeds(2021)
+names(ipeds2021)
+```
+
+The `ipeds_help` function will return the data dictionary for the given year.
+
+```{r, eval=FALSE}
+View(ipeds_help(2021))
+```
+
+If the `table` parameter is specified, then the data dictionary for the given survey is returned (i.e. the variables in that table, see `data(surveys)` for the available survey IDs).
+
+```{r, eval=FALSE}
+View(ipeds_help(table = 'HD', year = 2021))
+```
+
+To load a specific table, the `ipeds_survey` function will return a `data.frame` with the data.
+
+```{r}
+hd2021 <- ipeds::ipeds_survey(table = 'HD', year = 2021)
+names(hd2021)
+```
+
+Mapping variable factors.
+
+```{r}
+names(hd2021) <- tolower(names(hd2021))
+hd2021 <- ipeds::recodeDirectory(hd2021)
+
+IvyLeague <- c("186131","190150","166027","130794","215062","182670","217156","190415")
+hd2021.ivy <- hd2021[which(hd2021$unitid %in%IvyLeague),]
+p <- hd2021.ivy[, c("instnm", "webaddr", "stabbr", "control")]
+names(p) <- c("Institution", "Web Address", "State", "Sector")
+p
+```
+
+Use the enrollment survey data.
+
+```{r}
+enrollment <- ipeds::ipeds_survey(table = 'EFFY', year = 2021)
+names(enrollment) <- tolower(names(enrollment))
+
+enrollment <- enrollment[which(enrollment$unitid %in% c(IvyLeague) ),]
+enrollment <- merge(enrollment, hd2021[, c("unitid", "instnm", "control")], by = "unitid", all.x = TRUE, sort = FALSE)
+enrollment <- enrollment[which(enrollment[,"effylev"] == 1),] # Level 1 is Undergraduate
+
+p <- enrollment[, c("instnm", "efytotlt", "control")]
+names(p) <- c("Institution", "Total Undergraduate Enrollment", "Sector")
+p
+```
+
+
