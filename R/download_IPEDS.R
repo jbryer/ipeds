@@ -73,7 +73,12 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 						'Downloaded file: ', dest, '\n',
 						'File not found: ', accdb.file))
 		}
-	
+	xlsx.file <- c(Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*.xlsx")),Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*//*.xlsx")))[1]
+	if(!file.exists(xlsx.file)) {
+	  stop(paste0('Problem loading XLSX Documentation file.\n',
+	              'Downloaded file: ', dest, '\n',
+	              'File not found: ', xlsx.file))
+	}
 #Import Data from access, Windows version uses DBI and ODBC to query access files. 
 	if(.Platform$OS.type == 'windows'){
 	  #Windows based import of mdb files. Uses ODBC to connect. 
@@ -82,9 +87,18 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	    escape_characters <- c(' ', '(', ')')
 	    for(i in escape_characters) {
 	      accdb.file <- gsub(i, paste0('\\', i), accdb.file, fixed = TRUE)
+	      xlsx.file <- gsub(i, paste0('\\', i), xlsx.file, fixed = TRUE)
 	    }
 	    #connection string
 	    con<-DBI::dbConnect(odbc::odbc(), .connection_string = paste0("Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=",accdb.file,";"))
+	    #list al tables, and remove system tables from list
+	    TableList<-DBI::dbListTables(con)
+	    TableList<-TableList[!grepl("MSys",TableList)]
+	    #import all tables, and store in a list with name of table as list object name.
+	    
+	      tb<-list(valueset=DBI::dbGetQuery(con,paste0("Select * from [",TableList[grepl("valueset",TableList)][1],"]")))
+	    DBI::dbDisconnect(con)
+	    con<-DBI::dbConnect(odbc::odbc(), .connection_string = paste0("Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)}; Dbq=",xlsx.file,";"))
 	    #list al tables, and remove system tables from list
 	    TableList<-DBI::dbListTables(con)
 	    TableList<-TableList[!grepl("MSys",TableList)]
@@ -96,6 +110,7 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 	      return(tb)
 	    }))
 	    DBI::dbDisconnect(con)
+	    db<-c(db,tb)
 	    save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
 	  }, error = function(e) {
 	    print('Error loading the MS Access database file.')
