@@ -65,18 +65,14 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 		message('Zip file already downloaded. Set force=TRUE to redownload.')
 	}
 	
-	unzip(dest, exdir = dir)
+	unzip(dest, exdir = paste0(substr(dest,1,nchar(dest)-4),"//"))
 	
-	accdb.file <- paste0(dir, 'IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
+	accdb.file <- c(Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*.accdb")),Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*//*.accdb")))[1]
 	if(!file.exists(accdb.file)) {
-		# Check to see if it is a sub directory of the ZIP file.
-		accdb.file <- paste0(tools::file_path_sans_ext(dest), '/IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
-		if(!file.exists(accdb.file)) {
 			stop(paste0('Problem loading MS Access database file.\n',
 						'Downloaded file: ', dest, '\n',
 						'File not found: ', accdb.file))
 		}
-	}
 	
 #Import Data from access, Windows version uses DBI and ODBC to query access files. 
 	if(.Platform$OS.type == 'windows'){
