@@ -127,7 +127,7 @@ The `ipeds_help` function will return the data dictionary for the given
 year.
 
 ``` r
-View(ipeds_help(2021))
+View(ipeds_help(year=2021))
 ```
 
 If the `table` parameter is specified, then the data dictionary for the
