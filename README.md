@@ -26,11 +26,14 @@ To install the latest development version from Github use the
 remotes::install_github('jbryer/ipeds')
 ```
 
-This package requires [mdbtools](https://github.com/brianb/mdbtools).
+On Linux or Mac, this package requires [mdbtools](https://github.com/brianb/mdbtools).
 The following commands will install `mdbtools` on Mac:
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')
     brew install mdbtools
+
+On Windows, this package requires the Microsoft Access ODBC Driver. This driver comes with Microsoft Access. If you do not have Microsoft Access installed, or the Architecture differs from R (32bit vs 64bit), you can install the stand alone driver from [Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=54920)
+
 
 #### Using the `ipeds` package
 
