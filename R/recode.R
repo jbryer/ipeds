@@ -12,7 +12,7 @@ recodeDirectory <- function(hd) {
 	hd$hloffer = recodeHighestLevelOfOffering(hd$hloffer)
 	hd$ugoffer = recodeUndergraduateOffering(hd$ugoffer)
 	hd$groffer = recodeGraduateOffering(hd$groffer)
-	hd$hdegofr1 = recodeHighestDegreeOffered(hd$hdegofr1)
+	hd$hdegofr1 = recodeHighestDegreeOffered(if(is.null(hd$hdegofr1[1])){hd$groffer}else{hd$hdegofr1})
 	hd$openpubl = recodeOpenPublic(hd$openpubl)
 	hd$pset4flg = recodeTitleIVIndicator(hd$pset4flg)
 	hd$instsize = recodeInstitutionSize(hd$instsize)

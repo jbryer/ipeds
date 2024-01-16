@@ -65,45 +65,88 @@ download_ipeds <- function(year = as.integer(format(Sys.Date(), '%Y')) - 1,
 		message('Zip file already downloaded. Set force=TRUE to redownload.')
 	}
 	
-	unzip(dest, exdir = dir)
+	unzip(dest, exdir = paste0(substr(dest,1,nchar(dest)-4),"//"))
 	
-	accdb.file <- paste0(dir, 'IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
+	accdb.file <- c(Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*.accdb")),Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*//*.accdb")))[1]
 	if(!file.exists(accdb.file)) {
-		# Check to see if it is a sub directory of the ZIP file.
-		accdb.file <- paste0(tools::file_path_sans_ext(dest), '/IPEDS', (year - 1), sprintf("%02d",year %% 1000), '.accdb')
-		if(!file.exists(accdb.file)) {
 			stop(paste0('Problem loading MS Access database file.\n',
 						'Downloaded file: ', dest, '\n',
 						'File not found: ', accdb.file))
 		}
+	xlsx.file <- c(Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*.xlsx")),Sys.glob(paste0(substr(dest,1,nchar(dest)-4),"//*//*.xlsx")))[1]
+	if(!file.exists(xlsx.file)) {
+	  stop(paste0('Problem loading XLSX Documentation file.\n',
+	              'Downloaded file: ', dest, '\n',
+	              'File not found: ', xlsx.file))
 	}
+#Import Data from access, Windows version uses DBI and ODBC to query access files. 
+	if(.Platform$OS.type == 'windows'){
+	  #Windows based import of mdb files. Uses ODBC to connect. 
+	  tryCatch({
+	    # Characters in the file path that should be escaped before calling mdbtools
+	    escape_characters <- c(' ', '(', ')')
+	    for(i in escape_characters) {
+	      accdb.file <- gsub(i, paste0('\\', i), accdb.file, fixed = TRUE)
+	      xlsx.file <- gsub(i, paste0('\\', i), xlsx.file, fixed = TRUE)
+	    }
+	    #connection string
+	    con<-DBI::dbConnect(odbc::odbc(), .connection_string = paste0("Driver={Microsoft Access Driver (*.mdb, *.accdb)}; Dbq=",accdb.file,";"))
+	    #list al tables, and remove system tables from list
+	    TableList<-DBI::dbListTables(con)
+	    TableList<-TableList[!grepl("MSys",TableList)]
+	    #import all tables, and store in a list with name of table as list object name.
+	    
+	      tb<-list(valueset=DBI::dbGetQuery(con,paste0("Select * from [",TableList[grepl("valueset",TableList)][1],"]")))
+	    DBI::dbDisconnect(con)
+	    con<-DBI::dbConnect(odbc::odbc(), .connection_string = paste0("Driver={Microsoft Excel Driver (*.xls, *.xlsx, *.xlsm, *.xlsb)}; Dbq=",xlsx.file,";"))
+	    #list al tables, and remove system tables from list
+	    TableList<-DBI::dbListTables(con)
+	    TableList<-TableList[!grepl("MSys",TableList)]
+	    #import all tables, and store in a list with name of table as list object name.
+	    db<-do.call("c",lapply(TableList,function(x){
+	      tb<-list()
+	      tb[[x]]<-DBI::dbGetQuery(con,paste0("Select * from [",x,"]"))
+	      setNames(tb,x)
+	      return(tb)
+	    }))
+	    DBI::dbDisconnect(con)
+	    db<-c(db,tb)
+	    save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
+	  }, error = function(e) {
+	    print('Error loading the MS Access database file.')
+	    print('Use odbc::odbcListDataSources() to check for MS Access Database Driver.')
+	    print('If Missing, install from here: https://www.microsoft.com/en-us/download/details.aspx?id=54920')
+	    print('Architecture must match R version (64bit vs 32bit)')
+	    print(e)
+	  })}else{
+	    #*nix based version of MDB import
+	    # Need to have mdtools installed. From the terminal (on Mac):	
+	    # ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
+	    # brew install mdbtools
+	    tryCatch({
+	      # Characters in the file path that should be escaped before calling mdbtools
+	      escape_characters <- c(' ', '(', ')')
+	      for(i in escape_characters) {
+	        accdb.file <- gsub(i, paste0('\\', i), accdb.file, fixed = TRUE)
+	      }
+	      db <- Hmisc::mdb.get(accdb.file, stringsAsFactors = FALSE)
+	      save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
+	    }, error = function(e) {
+	      print('Error loading the MS Access database file. Make sure mdtools is installed.')
+	      if(Sys.info()['sysname'] == 'Darwin') {
+	        print('The following terminal commands will install mdtools on Mac systems:')
+	        cat('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')
+	        cat('brew install mdbtools \n')
+	      }
+	      print('Original Error:')
+	      print(e)
+	    })
+	    
+	    if(cleanup) {
+	      unlink(dest)
+	      unlink(accdb.file)
+	    }
+	    
+	    invisible(TRUE)
+	  }}
 	
-	# Need to have mdtools installed. From the terminal (on Mac):	
-	# ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null
-	# brew install mdbtools
-	tryCatch({
-		# Characters in the file path that should be escaped before calling mdbtools
-		escape_characters <- c(' ', '(', ')')
-		for(i in escape_characters) {
-			accdb.file <- gsub(i, paste0('\\', i), accdb.file, fixed = TRUE)
-		}
-		db <- Hmisc::mdb.get(accdb.file, stringsAsFactors = FALSE)
-		save(db, file = paste0(dir, 'IPEDS', year.str, '.Rda'))
-	}, error = function(e) {
-		print('Error loading the MS Access database file. Make sure mdtools is installed.')
-		if(Sys.info()['sysname'] == 'Darwin') {
-			print('The following terminal commands will install mdtools on Mac systems:')
-			cat('ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" < /dev/null 2> /dev/null \n')
-			cat('brew install mdbtools \n')
-		}
-		print('Original Error:')
-		print(e)
-	})
-	
-	if(cleanup) {
-		unlink(dest)
-		unlink(accdb.file)
-	}
-	
-	invisible(TRUE)
-}
